@@ -1,0 +1,2616 @@
+//Delay 1000
+//Call Plugin.Msg.Tips("Script start!!") 
+Dim slot(4)
+Call scriptInit
+
+//clickBigPartner(2)
+//Call testings
+//Call TryToResizingAllNox
+//Call ClickZonePartner(11)
+//Call CheckTodayAdvertisingDisappear(6)
+MoveToAddBoard2 (3)
+While true
+    //    	For 1
+    //            Call FishingSub(fishingTimes, fishingZone)
+    //        Call FishingSub(10000, 1)
+    //            Call B2Home_ClickPartner(1, 4)
+    //    
+    //    Call B2Home_ClickPartner(fishingZone, 3)
+    //    call FindTrainAndHelping(TrainHelpingZone)
+    //    Call BuyBuildingMaterials(buyItemZone)
+    //    Call BuyBuildingMaterials2(buyItemZone)
+    //    
+//    Rem checkPlot
+    clickZonePartner (11)
+    clickBigPartner (22)
+    clickZonePartner (33)
+    clickZonePartner (44)
+    //            Call plottingProcess(1)
+    //            Call BuyBuildingMaterials2(2)
+    //           	Call plottingProcess(3)
+    //           	If isAlready收成或種植 = true Then 
+    //           		isAlready收成或種植 = false
+    //           		Goto checkPlot
+    //           	End If
+    //	Call BuyBuildingMaterials2(2)
+    //	Call BuyBuildingMaterials3Mins(2)
+//    Call BuyBuildingMaterials(2, true)
+//    Call BuyBuildingMaterials3Mins(2)
+    
+//    Delay 30000
+    
+    //           	Call plottingProcess(4)
+    //           	If isAlready收成或種植 = true Then 
+    //           		isAlready收成或種植 = false
+    //           		Goto checkPlot
+    //           	End If
+    //    	Next
+    //
+    //    Call ClickTeamViewerAdd
+    //    Call BuyBuildingMaterials
+    //        call ClickPartner
+    //	For 2
+    //		Delay 25000
+    //	Next
+    //
+Wend
+Function testings
+    //	Call B2Home_ClickPartner(fishingZone, 3)
+    //    clickZonePartner (11)
+    //    clickBigPartner (22)
+    //    clickZonePartner (33)
+    //    clickZonePartner (44)
+    //	crossNight = inTimeChecker("20", "00", "21", "30")
+    //	TracePrint crossNight
+    //	crossDay = inTimeChecker("10", "00", "10", "30")
+    //	TracePrint crossDay
+    //	
+    //	Call inTimeChecker("20", "10", "20", "30")
+    //	TracePrint inTimeChecker("20", "10", "20", "50")
+    //	Call inTimeChecker("20", "10", "20", "26")
+    //	TracePrint inTime
+    //    clearFurits 1
+    //    clearFurits 3
+    //    clearFurits 4
+    //    TracePrint "Sell completed."
+    //
+    //	MsgBox "Sell completed."
+End Function
+Function scriptInit
+    // 0 = unknow, 1 = farm, 2 = fishing home, 3 = fishing stage.
+    applicationIcon = "Attachment:\AppIcon7.bmp"
+    generalSimilarity = 0.8
+    currentCatBossArea = 0
+    resizingZone = 6
+    nox_2x2Width = Plugin.sys.GetScRX / 2
+    nox_2x2Height =  plugin.sys.GetScRY / 2
+    // 150,125
+    // 790,440
+    shrinkStartX = 140
+    shrinkStartY = 110
+    shrinkEndX = 800 
+    shrinkEndY = 450
+    // init fishing area.
+    //        mainIsland = "Attachment:\LINE樂園.bmp"
+    mainIsland = "Attachment:\獅像島.bmp"
+    //FishingArea = "Attachment:\冰淇淋川.bmp"
+    //    FishingArea = "Attachment:\巨石像島.bmp"
+    //        FishingArea = "Attachment:\泳圈小溪.bmp"
+    //        FishingArea = "Attachment:\烏龜島.bmp"
+    //    FishingArea = "Attachment:\終極無人島.bmp"
+    //    FishingArea = "Attachment:\獅像本島.bmp"
+    FishingArea = "Attachment:\獅像本島.bmp"
+    fishingZone = 1
+    fishingTimes = 300
+    // 
+    timerInit = Plugin.sys.GetDateTime
+    intervalLimit = 720
+    //    intervalLimit = -1
+    buyPeriod = 180				// seconds.
+    buyInitialized = false
+    plotTarget = "Attachment:\植物-中心點-豆子.bmp"
+    plotOverTime = 600 - 30
+    zone1plottedTime = 0
+    zone2plottedTime = 0
+    zone3plottedTime = 0
+    zone4plottedTime = 0
+    speed_種植 = 12
+    speed_收成 = 12
+    //	offsetX = 25
+    //	offsetY = 13
+    //  offsetX = 24.28
+    //	offsetX = 24.38
+    offsetX = 24.25
+    offsetY = 12.13
+    buyItemZone=2
+    TrainHelpingZone = 1
+    setZone (TrainHelpingZone)
+    '25, 190, 159, 375
+    '210, 190, 347, 375
+    '393, 190, 530, 375
+    '578, 189, 713, 375
+    '764, 187, 900, 374
+    slot(0) = array(xStart + 35, yStart + 220, xStart + 145, yStart + 385)
+    slot(1) = array(xStart + 210, yStart + 220, xStart + 320, yStart + 385)
+    slot(2) = array(xStart + 385, yStart + 220, xStart + 495, yStart + 385)
+    slot(3) = array(xStart + 560, yStart + 220, xStart + 670, yStart + 385)
+    slot(4) = array(xStart + 735, yStart + 220, xStart + 845, yStart + 385)
+    TracePrint "slot(0): (" & slot(0)(0) & ", " & slot(0)(1) & ", " & slot(0)(2) & ", " & slot(0)(3) & ")"
+    TracePrint "slot(1): (" & slot(1)(0) & ", " & slot(1)(1) & ", " & slot(1)(2) & ", " & slot(1)(3) & ")"
+    TracePrint "slot(2): (" & slot(2)(0) & ", " & slot(2)(1) & ", " & slot(2)(2) & ", " & slot(2)(3) & ")"
+    TracePrint "slot(3): (" & slot(3)(0) & ", " & slot(3)(1) & ", " & slot(3)(2) & ", " & slot(3)(3) & ")"
+    TracePrint "slot(4): (" & slot(4)(0) & ", " & slot(4)(1) & ", " & slot(4)(2) & ", " & slot(4)(3) & ")"
+    FindPic slot(0)(0), slot(0)(1), slot(0)(2), slot(0)(3), "Attachment:\空格子2.bmp", 0.9, resX, resY
+End Function
+//-------------------Buy item process------------------------
+Function BuyBuildingMaterials3Mins(zone)
+    setZone(zone)
+    ' for initialize.
+    If buyInitialized = true then
+        timeDiff = DateDiff("s", previousRunTime, Plugin.sys.GetDateTIme())
+        If timeDiff < buyPeriod Then 
+            TracePrint Plugin.Sys.GetDateTime() & " " & "BuyBuildingMaterials3Mins is waiting for period(" & buyPeriod & "), now during = " & timeDiff
+            Goto endFucntion
+        Else 
+        	MoveToAddBoard2 (zone)
+        	Delay 1000
+        End If
+    Else 
+        buyInitialized = true
+        MoveToAddBoard2 (zone)
+        Delay 1000
+    End If
+    FindPic xStart, yStart, xEnd, yEnd, "Attachment:\廣告看板-重置.bmp", 0.7, x, y
+    If x > 0 and y > 0 Then 
+        Call TryToBuy(zone)
+        Call BackToSmellyCatHome
+    End If
+    Rem endFucntion
+End Function
+Function BuyBuildingMaterials(zone, untilAtHome)
+    TracePrint Plugin.Sys.GetDateTime() & " " & "BuyBuildingMaterials start."
+    setZone(zone)
+    // 嘗試開啟遊戲
+    Rem ReCheck
+    FindPic xStart, yStart, xEnd, yEnd, applicationIcon, 0.7, x, y
+    If x > 0 and y > 0 Then 
+        Call tryToStartBrownFarm_zone(2)
+        Delay 30000
+        Call clickZonePartner(11)
+        //        Call clickBigPartner (11)
+        Call clickZonePartner (33)
+        Call clickZonePartner (44)
+        Call EnsureAtHome(zone)
+        Call clickBigPartner (22)
+    End If
+    // 移到廣告看板
+    setZone (zone)
+    //    CheckTodayAdvertisingDisappear (zone)
+    Delay 1000
+    FindPic xStart, yStart, xEnd, yEnd, "Attachment:\自家-去背3.bmp", 0.7, x, y
+    If x < 0 and y < 0 Then 
+        FindPic xStart, yStart, xEnd, yEnd, "Attachment:\自家-去背2.bmp", 0.7, x, y
+        If x < 0 and y < 0 Then 
+            FindPic xStart, yStart, xEnd, yEnd, "Attachment:\NoZoomed_HomeModel1.bmp", 0.7, x, y
+            If x < 0 and y < 0 Then 
+                FindPic xStart, yStart, xEnd, yEnd, "Attachment:\NoZoomed_HomeModel2.bmp", 0.7, x, y
+                If x < 0 and y < 0 Then 
+                    FindPic xStart, yStart, xEnd, yEnd, "Attachment:\NoZoomed_HomeModel3.bmp", 0.7, x, y
+                End If
+            End If
+        End if
+    End if
+    If x > 0 and y > 0 Then 
+        MoveLeftClick xStart + 150, yStart + 100		// just active the windown.
+        Call MoveToAddBoard2(zone)					// 移動到廣告看板去找建材來買
+        //    	FindPic xStart, yStart, xEnd, yEnd, "Attachment:\廣告看板-重置.bmp", 0.7, x, y
+        //    	If x > 0 and y > 0 Then 
+        Call TryToBuy(zone)
+        Call RestartBF(zone)
+        Call clickZonePartner(11)
+        //		Call clickBigPartner (11)
+        //        Call clickBigPartner(22)
+        Call clickZonePartner (33)
+        Call clickZonePartner(44)
+        If untilAtHome=true then
+            Call EnsureAtHome(zone)
+            Call clickBigPartner(22)
+        End if
+    Else 
+        TracePrint Plugin.Sys.GetDateTime() & " " & "臭臭貓好像卡住了，嘗試重啟NOX!"
+        Call restartNOX(zone)
+        Delay 35000
+        Goto ReCheck
+    End If
+    TracePrint Plugin.Sys.GetDateTime() & " " & "BuyBuildingMaterials end."
+End Function
+Function BuyBuildingMaterials2(zone)
+    setZone(zone)
+    ' for initialize.
+    If buyInitialized = true then
+        timeDiff = DateDiff("s", previousRunTime, Plugin.sys.GetDateTIme())
+        If timeDiff < buyPeriod Then 
+            TracePrint Plugin.Sys.GetDateTime() & " " & "BuyBuildingMaterials2 is waiting for period(" & buyPeriod & "), now during = " & timeDiff
+            Goto endFucntion
+        End If
+    Else 
+        buyInitialized = true
+    End If
+    FindPic  xStart, yStart, xEnd, yEnd, "Attachment:\自家-去背3.bmp", 0.7, x, y
+    If x > 0 and y > 0 Then 
+        MoveTo x - 100, y - 100
+        LeftClick 1
+        Call MoveToAddBoard2(zone)
+        FindPic xStart, yStart, xEnd, yEnd, "Attachment:\廣告看板-重置.bmp", 0.7, x, y
+        If x > 0 and y > 0 Then 
+            Call TryToBuy(zone)
+            'Call RestartBF
+            'Call EnsureAtHome
+            Call BackToSmellyCatHome
+        End If
+    End If
+    Rem endFucntion
+End Function
+Function BackToSmellyCatHome
+    Rem ReCheck
+    // 0+960, 540-540, 960+960, 1080-540,
+    // 960, 0, 1920, 540
+    FindPic 960, 0, 1920, 540, "Attachment:\回車鍵_x42y43.bmp", 0.85, intX, intY
+    If intX > 0 and intY > 0 Then 
+        MoveLeftClick intX + 21, intY + 21
+        Delay 100
+        Rem ReCheck2
+        FindPic 960, 0, 1920, 540, "Attachment:\返家.bmp", 0.85, intX, intY
+        if intX>0 and intY>0 then 
+            MoveLeftClick intX + 27, intY + 27
+            Delay 500
+            FindPic 960, 0, 1920, 540, "Attachment:返家.bmp", 0.85, intX, intY
+            If intX < 0 and intY < 0 Then 
+                TracePrint Plugin.Sys.GetDateTime() & " " & "Smelly cat is going to home."
+            End if
+        Else 
+            FindPic 480, 810, 960, 1080, "Attachment:\自家-去背3.bmp", 0.7, x, y
+            If x > 0 and y > 0 Then 
+                TracePrint Plugin.Sys.GetDateTime() & " " & "Smelly cat still at home, waiting for next round."
+            Else 
+                TracePrint Plugin.Sys.GetDateTime() & " " & "返家_x67y56.bmp is not found,  go to recheck2."
+                Goto ReCheck2
+            End if
+        End If
+    Else 
+        TracePrint Plugin.Sys.GetDateTime() & " " & "回車鍵_x42y43.bmp is not found, go to recheck."
+        Goto ReCheck
+    End If
+End Function
+Function TryToBuy(zone)
+    setZone(zone)
+    TracePrint Plugin.Sys.GetDateTime() & " " & "TryToBuy start."
+    NextPageCount = 0
+    Rem ReCheck
+    // -貨倉
+    Call TryToFocusItemShop("Attachment:\看板-貨倉-油漆2.bmp")
+    Call TryToFocusItemShop("Attachment:\看板-貨倉-金屬板2.bmp")
+    Call TryToFocusItemShop("Attachment:\看板-貨倉-水泥2.bmp")
+    // -barn
+    Call TryToFocusItemShop("Attachment:\看板-barn-釘子2.bmp")
+    Call TryToFocusItemShop("Attachment:\看板-barn-木板2.bmp")
+    //    Call TryToFocusItemShop("Attachment:\看板-barn-黏膠.bmp")
+    //    // -Other
+    //        Call TryToFocusItemShop("Attachment:\看板-斧頭.bmp")
+    // -食材
+    //    Call TryToFocusItemShop("Attachment:\看板-食材-熱狗堡.bmp")
+    //	Call TryToFocusItemShop("Attachment:\看板-食材-雞蛋吐司.bmp")
+    //	Call TryToFocusItemShop("Attachment:\看板-食材-波蘿麵包.bmp")
+    //	Call TryToFocusItemShop("Attachment:\看板-食材-玉米麵包.bmp")
+    //	Call TryToFocusItemShop("Attachment:\看板-食材-麵包.bmp")
+    //	Call TryToFocusItemShop("Attachment:\看板-食材-豬肉.bmp")
+    //    Call TryToFocusItemShop("Attachment:\看板-食材-牛奶.bmp")
+    //	Call TryToFocusItemShop("Attachment:\看板-食材-雞蛋.bmp")
+    //	
+    //	Call TryToFocusItemShop("Attachment:\看板-食材-砂糖.bmp")
+    //	Call TryToFocusItemShop("Attachment:\看板-食材-鮮奶油.bmp")
+    //	Call TryToFocusItemShop("Attachment:\看板-食材-奶油.bmp")
+    //相對於廣告看板的最後一頁白點 -> 173, 437
+    //								163-183, 427-447
+    FindPic xStart, yStart, xEnd, yEnd, "Attachment:\廣告看板-重置.bmp", 0.7, AddX, AddY
+    // 502, 484, 524, 504
+    FindPic xStart+502, yStart+484, xEnd+524, yEnd+504, "Attachment:\頁數點-實心去背.bmp", 0.7, x, y
+    //    FindPic AddX+163, AddY+427, AddX+183, AddY+447, "Attachment:\頁數點-實心去背.bmp", 0.7, x, y
+    If AddX > 0 and AddY > 0 Then 
+        If x < 0 and y < 0 Then 
+            Call NextPage(zone)
+            Delay 100
+            NextPageCount = NextPageCount + 1
+            If NextPageCount > 10 Then 
+                Goto EndTryToBuy
+            Else 
+                Goto ReCheck
+            End If
+        Else 
+            TracePrint Plugin.Sys.GetDateTime() & " " & "已翻至最後一頁, TryToBuy end."
+            Goto EndTryToBuy
+        End if
+    End If
+    Rem EndTryToBuy
+End Function
+Function BuyProcess()
+    TracePrint Plugin.Sys.GetDateTime() & " " & "BuyProcess start." 
+    WaitTime = 0
+    Rem ReWaiting
+    FindPic xStart, yStart, xStart+300, yStart+260, "Attachment:\回車鍵_x42y43.bmp", 0.7, BackX, BackY
+    If BackX < 0 and BackY < 0 Then 
+        Delay 100
+        WaitTime = WaitTime + 1
+        // 如果10秒還進不去，那就代表當機了，需要重啟 NOX
+        If WaitTime > 100 Then 
+            Call RestartNOX(2)
+            Goto BuyProcessEnd
+        Else 
+            Goto ReWaiting
+        End If
+    End If
+    Rem 再確認
+    Delay 100
+    // -貨倉
+    Call TryToBuyItem("Attachment:\架上-貨倉-油漆2.bmp")
+    Call TryToBuyItem("Attachment:\架上-貨倉-金屬板2.bmp")
+    Call TryToBuyItem("Attachment:\架上-貨倉-水泥2.bmp")
+    // -barn
+    Call TryToBuyItem("Attachment:\架上-barn-釘子2.bmp")
+    Call TryToBuyItem("Attachment:\架上-barn-木板2.bmp")
+    Call TryToBuyItem("Attachment:\架上-barn-黏膠2.bmp")
+    // -Other
+    //        Call TryToBuyItem("Attachment:\架上-斧頭2.bmp")
+    // -食材
+    //    Call TryToBuyItem("Attachment:\架上-食材-熱狗堡2.bmp")
+    //    Call TryToBuyItem("Attachment:\架上-食材-雞蛋吐司2.bmp")
+    //    Call TryToBuyItem("Attachment:\架上-食材-波蘿麵包2.bmp")
+    //    Call TryToBuyItem("Attachment:\架上-食材-玉米麵包2.bmp")
+    //    Call TryToBuyItem("Attachment:\架上-食材-麵包2.bmp")
+    //	
+    //    Call TryToBuyItem("Attachment:\架上-食材-豬肉2.bmp")
+    //	    Call TryToBuyItem("Attachment:\架上-食材-牛奶2.bmp")
+    //    Call TryToBuyItem("Attachment:\架上-食材-雞蛋2.bmp")
+    //	
+    //    Call TryToBuyItem("Attachment:\架上-食材-砂糖2.bmp")
+    //    Call TryToBuyItem("Attachment:\架上-食材-鮮奶油2.bmp")
+    //    Call TryToBuyItem("Attachment:\架上-食材-奶油2.bmp")
+    Rem RecheckBackspace
+    ' 假設在找不到回車鍵的畫面去找回車鍵，這個地方就 dead lock了
+    FindPic xStart, yStart, xStart+300, yStart+260, "Attachment:\回車鍵_x42y43.bmp", 0.7, BackX, BackY
+    If BackX < 0 and BackY < 0 Then 
+        Delay 300
+        Call CheckPressOK
+        Goto RecheckBackspace
+    Else 
+        Call MoveLeftClick(BackX + 21, BackY + 21)
+        Delay 300
+    End If
+    Rem CheckIsIntoAddBoard
+    FindPic xStart, yStart, xEnd, yEnd, "Attachment:\廣告看板.bmp", 0.7, addX, addY
+    If addX > 0 and addY > 0 Then 
+        Call MoveLeftClick(addX + 30, addY + 45)	// 點看板不一定成功
+        Delay 500
+        // 確認是否成功？若不成功再 retry 一次
+        FindPic xStart, yStart, xStart+300, yStart+260, "Attachment:\回車鍵_x42y43.bmp", 0.7, BackX, BackY
+        If BackX < 0 and BackY < 0 Then 
+            Call MoveLeftClick(addX + 125, addY + 40)
+            Delay 5000
+            Goto CheckIsIntoAddBoard
+        End If
+    Else 
+        TracePrint Plugin.Sys.GetDateTime() & " " & "廣告看板.bmp is not found, 『或許』成功進到佈告欄了."
+        Call CheckPressOK
+    End If
+    Rem BuyProcessEnd
+    TracePrint Plugin.Sys.GetDateTime() & " " & "BuyProcess end." 
+End Function
+Function TryToFocusItemShop(focusName)
+    Rem ReCheck
+    // 65, 155
+    // 865, 510
+    FindPic xStart + 65, yStart + 155, xStart + 865, yStart + 510, focusName, 0.7, x, y
+    If x > 0 and y > 0 Then 
+        Call MoveLeftClick(x + 70, y + 40)
+        MoveTo xStart+100, yStart+100
+        Delay 3000
+        Call BuyProcess
+        Goto ReCheck
+    End If
+    TracePrint Plugin.Sys.GetDateTime() & " fFocus(" & focusName & ") is finished."
+End Function
+Function TryToBuyItem(itemName)
+    Rem ReCheckItem
+    FindPic xStart+10, yStart+180, xStart+900, yStart+430, itemName, 0.75, x, y
+    //    FindPic 10+960, 722-540, 900+960, 958-540, itemName, 0.75, x, y
+    If x > 0 and y > 0 Then 
+        Call MoveLeftClick(x + 55, y + 40)
+        MoveTo center_X, yStart+15
+        Delay 300
+        Call CheckPressOK
+        Delay 200
+        Call CheckPressOK
+        Goto ReCheckItem
+    End If
+End Function
+Function MoveToAddBoard2(zone)
+    setZone(zone)
+    TracePrint Plugin.Sys.GetDateTime() & " " & "MoveToAddBoard2 start."
+    Call CheckPressOK
+    
+    Rem recheck
+    Delay 300
+    'condition1 : 找到活動看板7
+    'condition1 - 1  : 目標位置沒超過zone2，則click 
+    'condition1 - 2  : 目標位置超過zone2，則由下往上 drag，然後 goto recheck.
+    'condition2 : 找到活動看板-排名賽
+    'condition2 - 1  : 目標位置沒超過zone2，則click 
+    'condition2 - 2  : 目標位置超過zone2，則由下往上 drag，然後 goto recheck.
+    'condition3 : 找到返家，按下反家後等20秒，然後 goto recheck.1
+    'condition3 - 1  : 目標位置沒超過zone2，則click 
+    'condition3 - 2  : 目標位置超過zone2，則由下往上 drag，然後 goto recheck.
+    
+    'condition0 : 找到 NoZoomed_HomeModel3 且 找到 自家-去背3，則移動
+    'condition1 : 找到月兔, 接著進一步判斷
+    'condition1 - 1  : 目標位置沒超過zone2，則click 
+    'condition1 - 2  : 目標位置超過zone2，則由下往上 drag，然後 goto recheck.
+    
+    ' 牛奶罐頭.bmp 到 廣告看板的相對距離為 105, 295
+    
+    FindPic xStart, yStart, xEnd, yEnd, "Attachment:\活動看板7.bmp", 0.7, x1, y1
+    FindPic xStart, yStart, xEnd, yEnd, "Attachment:\活動看板-排名賽.bmp", 0.7, x2, y2
+    FindPic xStart, yStart, xEnd, yEnd, "Attachment:\返家.bmp", 0.7, x3, y3
+    FindPic xStart, yStart, xEnd, yEnd, "Attachment:\自家-去背3.bmp", 0.7, x4, y4
+    FindPic xStart, yStart, xEnd, yEnd, "Attachment:\NoZoomed_HomeModel3.bmp", 0.7, x5, y5
+    FindPic xStart, yStart, xEnd, yEnd, "Attachment:\NoZoomed_HomeModel1.bmp", 0.7, x7, y7
+    // 40, 220
+//    FindPic xStart, yStart, xEnd, yEnd, "Attachment:\月兔.bmp", 0.65, x6, y6
+    
+    // 100, 290
+    FindPic xStart, yStart, xEnd, yEnd, "Attachment:\牛奶罐頭.bmp", 0.7, x6, y6
+	
+	If x1 > 0 and y1 > 0 Then '有找到廣告看板7
+		// 廣告看板 相對於 活動看板 位置 = 348, 186，按下點擊 (x + 352, y + 190)
+		
+		ansX = x1 + 352 + 12
+		ansY = y1 + 190 + 3
+		If ansY > yEnd Then 
+            MoveLeftDown xStart + 160, yStart + 525		// 移到下面偏左的位置
+            Call DragToRef(0, - 60 , 10, 30)			// 再往右上角小小的拖曳一次
+            Delay 200
+            LeftUp 1
+            Delay 500
+            TracePrint Plugin.Sys.GetDateTime() & " " & " 有廣告看板7，但點擊超過範圍，re-drag 並 goto recheck."
+            Goto recheck
+        Else 
+        	TracePrint Plugin.Sys.GetDateTime() & " " & " 有廣告看板7，試著點擊廣告看板... goto processEnd"
+        	MoveLeftClick ansX, ansY
+    		MoveTo center_X, yStart + 20
+        	CheckAndWaitBackspace (zone)
+        	Goto processEnd
+		End If
+	elseIf x2 > 0 and y2 > 0 Then '有找到活動看板-排名賽
+		// 廣告看板 相對於 活動看板 位置 = 348, 186，按下點擊 (x + 352, y + 190)
+		
+		ansX = x2 + 352 + 10
+		ansY = y2 + 190
+		If ansY > yEnd Then 
+            MoveLeftDown xStart + 160, yStart + 525		// 移到下面偏左的位置
+            Call DragToRef(0, - 60 , 10, 30)			// 再往右上角小小的拖曳一次
+            Delay 200
+            LeftUp 1
+            Delay 500
+            TracePrint Plugin.Sys.GetDateTime() & " " & " 有活動看板-排名賽，但點擊超過範圍，re-drag 並確認."
+            Goto recheck
+        Else 
+        	TracePrint Plugin.Sys.GetDateTime() & " " & " 有活動看板-排名賽，試著點擊廣告看板... goto processEnd"
+        	MoveLeftClick ansX, ansY
+    		MoveTo center_X, yStart + 20
+        	CheckAndWaitBackspace(zone)
+        	Goto processEnd
+		End If
+	elseIf x3 > 0 and y3 > 0 Then '有找到返家
+		TracePrint Plugin.Sys.GetDateTime() & " " & " 試著 goto recheck..."
+		MoveLeftClick x3+25, y3+25
+		Delay 10000
+		EnsureAtHome (zone)
+		Goto recheck
+	ElseIf x4 > 0 and y4 > 0 and ((x5 > 0 and y5 > 0) or (x7 > 0 and y7 > 0)) Then '在家正中心往廣告移去
+		TracePrint Plugin.Sys.GetDateTime() & " " & " 找到NoZoomedHome 及自家-去背3，試著由家中前往廣告看板，接著 goto recheck"
+        MoveLeftDown xStart+160, yStart+525
+        Call DragToRef(640, - 315 , 20, 20)
+        Delay 300
+        LeftUp 1
+        MoveTo xStart+200, yStart+100
+        Delay 500
+        Goto recheck
+    ElseIf x6 > 0 and y6 > 0 Then '有找到月兔
+//		ansX = x6 + 40 + 24 
+//		ansY = y6 + 220 + 21
+//		ansX = x6 + 25 
+//		ansY = y6 + 240
+		ansX = x6 + 105
+		ansY = y6 + 295
+//		MoveTo ansX,ansY
+		If ansY > (yEnd-30) Then 
+            MoveLeftDown xStart + 160, yStart + 525		// 移到下面偏左的位置
+            Call DragToRef(0, - 60 , 10, 30)			// 再往右上角小小的拖曳一次
+            Delay 200
+            LeftUp 1
+            Delay 500
+            TracePrint Plugin.Sys.GetDateTime() & " " & " 有月兔，但點擊超過範圍，re-drag 並 goto recheck."
+            Goto recheck
+        Else 
+        	MoveLeftClick ansX, ansY
+    		MoveTo center_X, yStart + 20
+        	CheckAndWaitBackspace(zone)
+        	TracePrint Plugin.Sys.GetDateTime() & " " & " 藉由月兔進到廣告看板，goto processEnd."
+            Goto processEnd
+		End If
+	End If
+
+    Rem processEnd
+    TracePrint Plugin.Sys.GetDateTime() & " " & "counter = " & counter & ", 回車鍵 is find, already in Goods lists."
+    previousRunTime = Plugin.Sys.GetDateTime()
+    TracePrint Plugin.Sys.GetDateTime() & " " & "renew previousRunTime = " & previousRunTime
+End Function
+Function MoveToAddBoard(zone)
+    setZone(zone)
+    TracePrint Plugin.Sys.GetDateTime() & " " & "MoveToAddBoard start."
+    checkAddCounter = 0
+    Call CheckPressOK
+    MoveTo xStart + 500, yStart + 1000
+    LeftDown 1
+    Call DragToRef(100, -150, 10, 8)
+    LeftUp 1
+    Rem CheckAddBoard
+    FindPic xStart, yStart, xEnd, yEnd, "Attachment:\等我一下.bmp", 0.85, x, y
+    If x > 0 and y > 0 Then 
+        MoveLeftClick x + 50, y + 20
+        Delay 2000
+    End If
+    FindPic xStart, yStart, xEnd, yEnd, "Attachment:\廣告看板-小.bmp", 0.7, x, y
+    If x<0 and y<0 then 
+        FindPic xStart, yStart, xEnd, yEnd, "Attachment:\廣告看板-小2.bmp", 0.7, x, y
+        If x < 0 and y < 0 Then 
+            FindPic xStart, yStart, xEnd, yEnd, "Attachment:\廣告看板-小3.bmp", 0.7, x, y
+            If x > 0 and y > 0 Then 
+                TracePrint "廣告看板-小3.bmp is found."
+            Else 
+                TracePrint "廣告看板找不到 ... "
+            End If
+        Else 
+            TracePrint "廣告看板-小2.bmp is found."
+        End If
+    Else 
+        TracePrint "廣告看板-小.bmp is found."
+    End if 
+    If x<0 and y<0  Then
+        MoveTo xStart + 600, yStart + 160
+        KeyDown "Ctrl", 1
+        MouseWheel -3
+        Delay 300
+        MouseWheel -3
+        Delay 300
+        MouseWheel -3
+        Delay 300
+        KeyUp "Ctrl", 1
+        Delay 1000
+        checkAddCounter = checkAddCounter + 1
+        If checkAddCounter > 15 Then 
+            Call RestartBF(zone)
+            checkAddCounter = 0
+        Else 
+            Goto CheckAddBoard
+        End If
+    Else
+        If x > 0 and y > 0 Then 
+            // 14, 22
+            Call MoveLeftClick (x+18, y+26)
+            MoveTo xStart + 700, yStart + 110
+            Delay 500
+            FindPic xStart, yStart, xEnd, yEnd, "Attachment:\自家-去背.bmp", 0.7, x, y
+            If x > 0 and y > 0 Then 
+                MoveTo x - 100, y - 100
+                LeftClick 1
+                GoTo CheckAddBoard
+            End If
+        End If
+    End If
+    counter = 0
+    Rem WaitingBackspace
+    Delay 100
+    FindPic xStart, yStart, xStart + 250, yStart + 250, "Attachment:\回車鍵_x42y43.bmp", 0.7, intX, intY
+    If intX < 0 and intY < 0 Then 
+        counter = counter + 1
+        If counter > 80 Then 
+            Goto CheckAddBoard
+        Else 
+            Goto WaitingBackspace
+        End If
+    Else 
+        TracePrint Plugin.Sys.GetDateTime() & " " & "counter = " & counter & ", 回車鍵 is find."
+        previousRunTime = Plugin.Sys.GetDateTime()
+        TracePrint Plugin.Sys.GetDateTime() & " " & "renew previousRunTime = " & previousRunTime
+    End If
+End Function
+//-------------------Buy item process------------------------
+//-------------------Fish process------------------------
+Function FishingSub(fishingTimes, fishingZone)
+    setZone (fishingZone)
+    MoveLeftClick xStart + 300, yStart + 20
+    FindPic xStart,yStart,xEnd,yEnd, "Attachment:\自家-去背.bmp", 0.8, farmHomeX, farmHomeY
+    FindPic xStart,yStart,xEnd,yEnd, "Attachment:\漁場HOME.bmp", 0.8, fishingHomeX, fishingHomeY
+    FindPic xStart,yStart,xEnd,yEnd, "Attachment:\藍底黃箭-返回.bmp", 0.8, fishingStageX, fishingStageY
+    If farmHomeX > 0 and farmHomeY > 0 Then 
+        //        currentCatBossArea = 農場環境
+        Call TryToMoveToFishingField
+    Elseif fishingHomeX > 0 and fishingHomeY > 0 Then 
+        //        currentCatBossArea = 漁場環境
+        Call TryToGetInStage(fishingZone)
+    Elseif fishingStageX > 0 and fishingStageY > 0 Then 
+        //        currentCatBossArea = "開始釣魚" 
+        TracePrint Plugin.Sys.GetDateTime() & " " & "Already in fishing field."
+    Else 
+        //        currentCatBossArea = 不知道在什麼地方，試著重啟
+        TracePrint Plugin.Sys.GetDateTime() & " " & "Unknow field, try to start CatBoss farm."
+        Call TryToStartBrownFarm_CatBoss
+        Call TryToMoveToFishingField
+    End If
+    For fishingTimes
+        Call CheckClickBackspace
+        Call CheckClickOK
+        //		Call CheckBuyBait
+        //		Call CheckMaintain
+        //        call repairRodDirectly
+        Call CheckFishingProcess
+    Next
+    //    Call clickZonePartner(11)
+    //    Call clickZonePartner(22)
+    Call clickBigPartner(22)    		// smelly cat
+    Call clickZonePartner(33)
+    Call clickZonePartner(44)
+End Function
+Function CheckBuyBait
+    TracePrint Plugin.Sys.GetDateTime() & " " & "CheckBuyBait start."
+    FindPic 0, 0, 960, 540, "Attachment:\沒綜合水果.bmp", 0.8, x5, y5	// bait seq 5
+    FindPic 0, 0, 960, 540, "Attachment:\沒美味蛤包.bmp", 0.8, x4, y4	// bait seq 4
+    FindPic 0, 0, 960, 540, "Attachment:\沒強力麩質.bmp", 0.8, x3, y3	// bait seq 3
+    FindPic 0, 0, 960, 540, "Attachment:\沒香甜玉米.bmp", 0.8, x2, y2	// bait seq 2
+    FindPic 0, 0, 960, 540, "Attachment:\沒蝦球.bmp", 0.8, x1, y1  		// bait seq 1
+    If x1 > 0 and y1 > 0 Then 
+        Call GoToBaitTag
+        Delay 2000
+        Call BuyBaits(1, 30)
+        Call CheckClickBackspace
+    ElseIf x2 > 0 and y2 > 0 Then
+        Call GoToBaitTag
+        Delay 2000
+        Call BuyBaits(2, 30)
+        Call CheckClickBackspace
+    ElseIf x3 > 0 and y3 > 0 Then
+        Call GoToBaitTag
+        Delay 2000
+        Call BuyBaits(3, 30)
+        Call CheckClickBackspace
+    ElseIf x4 > 0 and y4 > 0 Then
+        Call GoToBaitTag
+        Delay 2000
+        Call BuyBaits(4, 30)
+        Call CheckClickBackspace
+    ElseIf x5 > 0 and y5 > 0 Then
+        Call GoToBaitTag
+        Delay 2000
+        Call BuyBaits(5, 30)
+        Call CheckClickBackspace
+    End If
+    REM CheckBuyBaitEnd
+End Function
+Function B2Home_ClickPartner(zone, clickTimes)
+    setZone(zone)
+    timerCurrent = Plugin.sys.GetDateTime
+    intervalCurrent = DateDiff("s", timerInit, timerCurrent)
+    If intervalLimit < intervalCurrent Then 
+        //		Call TryToLeaveBrownFarmBySwitch
+        //        Call TryToLeaveBrownFarmByEsc
+        //        Call TryToStartBrownFarm_CatBoss
+        Call RestartBF(zone)
+        Delay 25000
+        Call ZoomOut_zone(center_X, center_Y, 4)
+        Delay 2000
+        For clickTimes
+            Delay 2000
+            TracePrint Plugin.Sys.GetDateTime() & " " & "ClickPartner execute seq: " & clickTimes
+            Call ClickZonePartner(11)
+            Delay 2000
+            //            Call clickBigPartner(22)
+            //            Call ClickZonePartner(33)
+            //            Call ClickZonePartner(44)
+        Next
+        Call TryToMoveToFishingField
+        timerInit = Plugin.sys.GetDateTime
+    End If
+End Function
+Function BuyBaits(seq, times)
+    If seq = 1 Then 
+        FindPic 0, 0, 960, 540, "Attachment:\餌料價格-蝦球.bmp", 0.8, baitX, baitY
+        If baitX > 0 and baitY > 0 Then 
+            For times
+                call DoBuyingBaits(baitX, baitY)
+            next
+        Else 
+            TracePrint Plugin.Sys.GetDateTime() & " " & "找不到蝦球圖示"
+            Goto BuyBaitsEnd
+        End If
+    ElseIf seq = 2 Then
+        FindPic 0, 0, 960, 540, "Attachment:\餌料價格-香甜玉米.bmp", 0.8, baitX, baitY
+        If baitX > 0 and baitY > 0 Then 
+            For times
+                call DoBuyingBaits(baitX, baitY)
+            next
+        Else 
+            TracePrint Plugin.Sys.GetDateTime() & " " & "找不到香甜玉米圖示"
+            Goto BuyBaitsEnd
+        End If
+    ElseIf seq = 3 Then
+        FindPic 0, 0, 960, 540, "Attachment:\餌料價格-強力麩質.bmp", 0.8, baitX, baitY
+        If baitX > 0 and baitY > 0 Then 
+            For times
+                call DoBuyingBaits(baitX, baitY)
+            next
+        Else 
+            TracePrint Plugin.Sys.GetDateTime() & " " & "找不到強力麩質圖示"
+            Goto BuyBaitsEnd
+        End If
+    ElseIf seq = 4 Then
+        FindPic 0, 0, 960, 540, "Attachment:\餌料價格-美味蛤包.bmp", 0.8, baitX, baitY
+        If baitX > 0 and baitY > 0 Then 
+            For times
+                call DoBuyingBaits(baitX, baitY)
+            next
+        Else 
+            TracePrint Plugin.Sys.GetDateTime() & " " & "找不到美味蛤包圖示"
+            Goto BuyBaitsEnd
+        End If
+    ElseIf seq = 5 Then
+        FindPic 0, 0, 960, 540, "Attachment:\餌料價格-綜合水果.bmp", 0.8, baitX, baitY
+        If baitX > 0 and baitY > 0 Then 
+            For times
+                call DoBuyingBaits(baitX, baitY)
+            next
+        Else 
+            TracePrint Plugin.Sys.GetDateTime() & " " & "找不到綜合水果圖示"
+            Goto BuyBaitsEnd
+        End If
+    Else 
+        TracePrint Plugin.Sys.GetDateTime() & " " & "Error: Invalid bat sequence."
+    End If
+    Rem BuyBaitsEnd
+    Delay 2000
+End Function
+Function DoBuyingBaits(pos_x, pos_y)
+    MoveLeftClick pos_x + 110, pos_y + 106
+    Delay 300
+    MoveLeftClick 542, 362
+    Delay 600
+    MoveLeftClick 460, 360
+    Delay 600
+End Function
+Function CheckClickBackspace
+    FindPic 0, 0, 200, 200, "Attachment:\回車鍵_x42y43.bmp", 0.8, x, y
+    If x > 0 and y > 0 Then 
+        MoveTo x + 21, y + 22
+        LeftClick 1  ' 回到"開始釣魚"
+        Delay 500
+    End if
+End Function
+Function GoToBaitTag
+    FindPic 0, 0, 960, 540, "Attachment:\釣具店ICON.bmp", 0.8, x, y
+    If x < 0 and y < 0 Then 
+        TracePrint Plugin.Sys.GetDateTime() & " " & "沒找到釣具店ICON, GoToBaitTag end."
+        Goto GoToBaitTagEnd
+    Else 
+        // 點進釣具店
+        MoveTo x + 21, y + 21
+        LeftClick 1
+        Delay 500
+        // 確認是不是在餌料欄，不是的話，就按下餌料欄
+        Rem RecheckInBaitTag
+        FindPic 0, 0, 960, 540, "Attachment:\餌料欄-按下4.bmp", 0.8, x, y
+        If x < 0 and y < 0 Then 
+            FindPic 0, 0, 960, 540, "Attachment:\餌料欄-沒按下4.bmp", 0.8, x, y
+            If x > 0 and y > 0 Then 
+                TracePrint Plugin.Sys.GetDateTime() & " " & "按下餌料欄~"
+                MoveTo x + 35, y + 24
+                LeftClick 1
+                Delay 200
+                Goto RecheckInBaitTag
+            End If
+        Else 
+            TracePrint Plugin.Sys.GetDateTime() & " " & "到餌料欄囉"
+        End If
+    End If
+    Rem GoToBaitTagEnd
+End Function
+Function CheckMaintainNew
+    TracePrint Plugin.Sys.GetDateTime() & " " & "CheckMaintainNew start."
+    FindPic 0, 0, 960, 540, "Attachment:\修釣竿圖示-去背.bmp", 0.75, x1, y1
+    If x1 > 0 and y1 > 0 Then 
+        TracePrint Plugin.Sys.GetDateTime() & " " & "修釣竿圖示-去背.bmp is found."
+        MoveLeftClick x1, y1
+        Delay 500
+        FindPic 0, 0, 960, 540, "Attachment:\直接修理釣竿的修理.bmp", 0.75, x1, y1
+        If x1 > 0 and y1 > 0 Then 
+            TracePrint Plugin.Sys.GetDateTime() & " " & "直接修理釣竿的修理.bmp is found."
+            MoveLeftClick x1 + 22, y1 + 12
+            Delay 500
+            FindPic 0, 0, 960, 540, "Attachment:\去背-魚幣ICON.bmp", 0.75, x, y
+            If x > 0 and y > 0 Then 
+                TracePrint Plugin.Sys.GetDateTime() & " " & "去背-魚幣ICON.bmp is found."
+                Call MoveLeftClick(x + 40, y + 17)
+                Delay 300
+                ' 按下第1個ok
+                MoveTo 460, 360
+                LeftClick 1
+                Delay 300
+                ' 按下第2個ok
+                MoveTo 622, 151
+                LeftClick 1
+                Delay 300
+            End If
+        Else 
+            TracePrint Plugin.Sys.GetDateTime() & " " & "直接修理釣竿的修理.bmp is not found."
+        End if
+    End if
+End Function
+Function CheckMaintain
+    TracePrint Plugin.Sys.GetDateTime() & " " & "CheckMaintain start."
+    FindPic 0, 0, 960, 540, "Attachment:\修釣竿圖示-去背.bmp", 0.75, x1, y1
+    If x1 > 0 and y1 > 0 Then 
+        FindPic 0, 0, 960, 540, "Attachment:\釣具箱ICON.bmp", 0.8, x2, y2
+        If x2 > 0 and y2 > 0 Then 
+            MoveTo x2+27, y2+31
+            LeftClick 1
+            Delay 200
+            FindPic 0, 0, 960, 540, "Attachment:\釣竿欄-按下4.bmp", 0.8, x3, y3
+            If x3 < 0 and y3 < 0 Then 
+                FindPic 0, 0, 960, 540, "Attachment:\釣竿欄-沒按下4.bmp", 0.8, x4, y4
+                MoveTo x4 + 35, y4 + 23
+                LeftClick 1
+                Delay 200
+            End If
+            Call Maintain
+        End If
+    End If
+End Function
+Function repairRodDirectly
+    //	Delay 500
+    MoveLeftClick 267, 373
+    Delay 100
+    MoveLeftClick 523, 444
+    Delay 100
+    MoveLeftClick 541, 413
+    Delay 100
+    MoveLeftClick 461, 355
+    Delay 100
+    MoveLeftClick 622, 149
+    Delay 100
+End Function
+Function Maintain
+    TracePrint Plugin.Sys.GetDateTime() & " " & "Maintain start."
+    FindPic 0, 0, 960, 540, "Attachment:\耐力為0.bmp", 0.8, x, y
+    If x>0 and y>0
+        MoveTo x + 29, y - 50
+        LeftClick 1
+        Delay 500
+        FindPic 0, 0, 960, 540, "Attachment:\修理釣竿確定.bmp", 0.8, x, y
+        If x > 0 and y > 0 Then 
+            MoveTo x+24, y +12
+            LeftClick 1
+            Delay 500
+            FindPic 0, 0, 960, 540, "Attachment:\確定要修理釣竿嗎-去背.bmp", 0.8, x, y
+            If x > 0 and y > 0 Then 
+                MoveTo x + 91, y + 143  //移到修理金額的位置
+                LeftClick 1
+                Delay 500
+                FindPic 100, 100, 860, 540, "Attachment:\綠OK-去背.bmp", 0.8, x, y
+                If x > 0 and y > 0 Then 
+                    MoveTo x + 21, y + 17
+                    LeftClick 1
+                    Delay 500
+                    FindPic 100, 100, 860, 540, "Attachment:\叉叉-去背.bmp", 0.8, x, y
+                    If x > 0 and y > 0 Then 
+                        MoveTo x+12, y+12
+                        LeftClick 1
+                        Delay 500
+                        Call CheckClickBackspace
+                    End If
+                End If
+            End if
+        End If
+    End if
+End Function
+Function CheckRepairTackle
+    TracePrint Plugin.Sys.GetDateTime() & " " & "CheckRepairTackle start."
+    Call MoveLeftClick(x+203 , y+136)
+    Rem Recheck
+    Delay 500
+    FindPic 0, 0, 960, 540, "Attachment:\去背-釣具驚嘆號.bmp", 0.6, x, y
+    If x > 0 and y > 0 Then 
+        TracePrint Plugin.Sys.GetDateTime() & " " & "去背-釣具驚嘆號.bmp is found."
+        Call MoveLeftClick(x - 2, y + 27)
+        MoveTo 130, 130
+        Delay 500
+        FindPic 0, 0, 960, 540, "Attachment:\修理釣具的修理.bmp", 0.8, x, y
+        If x > 0 and y > 0 Then 
+            TracePrint Plugin.Sys.GetDateTime() & " " & "修理釣具的修理3.bmp is found."
+            Call MoveLeftClick(x + 22, y + 12)
+            MoveTo 130, 130
+            Delay 500
+            FindPic 0, 0, 960, 540, "Attachment:\去背-魚幣ICON.bmp", 0.6, x, y
+            If x > 0 and y > 0 Then 
+                TracePrint Plugin.Sys.GetDateTime() & " " & "去背-魚幣ICON.bmp is found."
+                Call MoveLeftClick(x + 40, y + 17)
+                MoveTo 130, 130
+                Delay 500
+                FindPic 0, 0, 960, 540, "Attachment:\綠OK-修理.bmp", 0.65, x, y
+                If x > 0 and y > 0 Then 
+                    TracePrint Plugin.Sys.GetDateTime() & " " & "綠OK-修理.bmp is found."
+                    Call MoveLeftClick(x + 20, y + 15)
+                    MoveTo 130, 130
+                    Delay 500
+                    FindPic 0, 0, 960, 540, "Attachment:\黃叉叉_x26y27.bmp", 0.7, x, y
+                    If x > 0 and y > 0 Then 
+                        TracePrint Plugin.Sys.GetDateTime() & " " & "黃叉叉_x26y27.bmp is found."
+                        Call MoveLeftClick(x + 22, y + 13)
+                        MoveTo 130, 130
+                        Delay 500
+                        Goto Recheck
+                    End If
+                End If
+            End If
+        End If
+    Else 
+        FindPic 0, 0, 960, 540, "Attachment:\叉叉_去背.bmp", 0.7, x, y
+        If x > 0 and y > 0 Then 
+            TracePrint Plugin.Sys.GetDateTime() & " " & "叉叉_去背.bmp is found."
+            Call MoveLeftClick(x + 11, y + 11)
+            MoveTo 130, 130
+            Delay 500
+        End If
+    End If
+End Function
+Function CheckFishingProcess()
+    TracePrint Plugin.Sys.GetDateTime() & " " & "CheckFishingProcess start."
+    Rem ReCheck開始釣魚
+    //    FindPic 0, 0, 960, 540, "Attachment:\開始釣魚.bmp", 0.75, stageStartX, stageStartY
+    FindPic xStart, yStart, xEnd, yEnd, "Attachment:\開始釣魚.bmp", 0.75, stageStartX, stageStartY
+    If stageStartX > 0 and stageStartY > 0 Then 
+        Call CheckBuyBait
+        //		Delay 500
+        Call CheckMaintainNew
+        //		Delay 500
+        Rem ReClick
+        MoveTo stageStartX + 69, stageStartY + 23
+        LeftClick 1
+        MoveTo xStart + 130, yStart + 130
+        Delay 500
+        FindPic xStart, yStart, xEnd, yEnd, "Attachment:\去背_釣具耐力為0.bmp", 0.7, x, y
+        If x > 0 and y > 0 Then 
+            Call CheckRepairTackle
+            Goto ReClick
+        End If
+        Delay 3500
+        Rem CheckClickFishing
+        Delay 300
+        FindPic xStart+600, yStart+0, xStart+960, yStart+300, "Attachment:\釣魚關卡ICON-去背.bmp", 0.75, x, y
+        If x > 0 and y > 0 Then 
+            Call ClickFishing
+            Call CheckClickOK   ' 這邊有可能會重啟
+            Delay 500
+            Call EnsureFishingHome
+        Else 
+            TracePrint Plugin.Sys.GetDateTime() & " " & "沒找到釣魚關卡ICON....再找找"
+            Goto CheckClickFishing
+        End If
+    Else 
+        TracePrint Plugin.Sys.GetDateTime() & " " & "沒找到 開始釣魚.bmp....可能釣到新魚種了, 試著按下 click."
+        Call MoveLeftClick (xStart+130, yStart+130)
+        Delay 500
+        Goto ReCheck開始釣魚
+    End If
+End Function
+Function EnsureFishingHome
+    Rem Recheck
+    FindPic 0, 0, 960, 540, "Attachment:\開始釣魚.bmp", 0.75, x, y
+    If x < 0 and y < 0 Then 
+        Call MoveLeftClick(130, 130)
+        Delay 300
+        Call CheckClickOK  ' 防升級卡住
+        Goto Recheck
+    Else 
+        TracePrint Plugin.Sys.GetDateTime() & " " & "Back to finshing stage successful. "
+    End if
+End Function
+Function CheckClickOK
+    TracePrint Plugin.Sys.GetDateTime() & " " & "CheckClickOK start."
+    startTime = Plugin.sys.GetDateTime()
+    Rem ReCheckClickOK
+    currentTime = Plugin.sys.GetDateTime()
+    durings = DateDiff("s", startTime, currentTime)
+    If durings > 25 Then 
+        TracePrint Plugin.Sys.GetDateTime() & " " & "Brown farm timeout: " & durings
+        Call TryToLeaveBrownFarmBySwitch
+        Call TryToStartBrownFarm_CatBoss
+        Call TryToMoveToFishingField
+        TracePrint Plugin.Sys.GetDateTime() & " " & "ClickOK is stucking, restart farm and abnormal end."
+    End If
+    FindPic 100, 100, 860, 540, "Attachment:\黃OK.bmp", 0.7, x, y
+    If x > 0 and y > 0 Then 
+        MoveTo x + 82, y + 30
+        LeftClick 1
+        Delay 1000
+        MoveTo 130, 130
+        Goto ReCheckClickOK
+    End If
+    FindPic 100, 100, 860, 540, "Attachment:\藍OK.bmp", 0.8, x, y
+    If x > 0 and y > 0 Then 
+        MoveTo x + 71, y + 29
+        LeftClick 1
+        Delay 1000
+        MoveTo 100, 100
+        Goto ReCheckClickOK
+    End If
+    FindPic 100, 100, 860, 540, "Attachment:\否2.bmp", 0.8, x, y
+    If x > 0 and y > 0 Then 
+        MoveTo x + 63, y + 26
+        LeftClick 1
+        Delay 1000
+        MoveTo 100, 100
+        Goto ReCheckClickOK
+    End If
+    FindPic 100, 100, 860, 540, "Attachment:\綠OK-去背.bmp", 0.8, x, y
+    If x > 0 and y > 0 Then 
+        MoveTo x + 21, y + 17
+        LeftClick 1
+        Delay 1000
+        MoveTo 100, 100
+        Goto ReCheckClickOK
+    End If
+    ' AutoOn 魚神餌的對話
+    FindPic 300, 300, 960, 540, "Attachment:\AutoOff.bmp", 0.9, x, y
+    If x > 0 and y > 0 Then 
+        MoveTo x + 28, y + 10
+        LeftClick 1
+        Delay 8000
+        MoveTo 100, 100
+        Goto ReCheckClickOK
+    End If
+End Function
+Function ClickFishing
+    clickStartTime = Plugin.Sys.GetDateTime()
+    TracePrint Plugin.Sys.GetDateTime() & " " & "ClickFishing start: " & clickStartTime
+    currentTime = 0
+    fishType = 0
+    // 紅心點位置: 462, 321 (距離80)
+    distance = 90
+    clicks = 3
+    While true
+        Rem ReCapture
+        If fishType = 0 Then 
+            //            TracePrint Plugin.Sys.GetDateTime() & " " & "type=0"
+            // A36F19 魚影的灰色
+            // 29EFFA 魚神的黃色
+            // A36F19 終極無人島魚影的灰色
+            // 0060FF 點擊爆擊的橘色
+            // 3EF8FF 點擊一般的黃色
+            /*
+            zone Purple = 310,231 - 613,417   (judge zone)
+			zone Green = 420,230 - 503,417
+			zone Yellow = 311,290 - 614,354
+			zone Red = 340,266 - 587,382
+			zone Blue = 375,246 - 551,403
+            */
+            ' fishtype = 1 為一般關卡
+            ' fishtype = 2 為魚神關卡
+            // FindPic 270, 160, 680, 490, "Attachment:\魚影.bmp", 0.9, x1, y1
+            FindColor 270, 160, 680, 490,"A36F19", x1, y1
+            If x1 > 0 and y1 > 0 Then 
+                fishType = 1
+            Else 
+                // FindPic 270, 160, 680, 490, "Attachment:\魚神魚影3.bmp", 0.9, x2, y2
+                FindColor 270, 160, 680, 490,"29EFFA", x2, y2
+                If x2 > 0 and y2 > 0 Then 
+                    fishType = 2
+                    TracePrint Plugin.Sys.GetDateTime() & " " & "找到魚神了!"
+                    //                Else 
+                    //                	FindPic 270, 160, 680, 490, "Attachment:\終極無人島魚影.bmp", 0.9, x3, y3
+                    //                	If x3 > 0 and y3 > 0 Then 
+                    //                    	fishType = 3
+                    //                    	TracePrint Plugin.Sys.GetDateTime() & " " & "找到終極無人島魚影了!"
+                    //                    End If
+                End If
+            End If
+        ElseIf fishType = 1 Then
+            //            TracePrint Plugin.Sys.GetDateTime() & " " & "type=1"
+            // FindPic 330, 285, 586, 364, "Attachment:\魚影2.bmp", 1, x1, y1
+            FindColor 270, 160, 680, 490, "A36F19", x1, y1
+            //            FindColor 270, 160, 680, 490, "3EF8FF", x3, y3  ' 一般攻擊的黃色
+            //            If x3 > 0 and y3 > 0 Then 
+            //                LeftClick clicks
+            //                Goto ReCapture
+            //            End If
+            FindColor 270, 160, 680, 490, "0060FF", x4, y4  ' 爆擊的橘色
+            If x4 > 0 and y4 > 0 Then 
+                LeftClick clicks
+                FindPic 200, 90, 750, 490, "Attachment:\點魚失敗的紅色2.bmp", 0.8, xFail, yFail
+                If xFail > 0 and yFail > 0 Then 
+                    Delay 500
+                End If
+                Goto ReCapture
+            End If
+        ElseIf fishType = 2 Then
+            //            TracePrint Plugin.Sys.GetDateTime() & " " & "type=2"
+            // FindPic 330, 285, 586, 364, "Attachment:\魚神魚影2.bmp", 1, x2, y2
+            FindColor 270, 160, 680, 490, "29EFFA", x2, y2
+            //            FindColor 270, 160, 680, 490, "3EF8FF", x3, y3  ' 一般攻擊的黃色
+            //            If x3 > 0 and y3 > 0 Then 
+            //                LeftClick clicks
+            //                Goto ReCapture
+            //            End If
+            FindColor 270, 160, 680, 490, "0060FF", x4, y4  ' 爆擊的橘色
+            If x4 > 0 and y4 > 0 Then 
+                LeftClick clicks
+                FindPic 200, 90, 750, 490, "Attachment:\點魚失敗的紅色2.bmp", 0.8, xFail, yFail
+                If xFail > 0 and yFail > 0 Then 
+                    Delay 300
+                End If
+                Goto ReCapture
+            End If
+            //ElseIf fishType = 3 Then
+            //            TracePrint Plugin.Sys.GetDateTime() & " " & "type=2"
+            //    FindPic 330, 285, 586, 364, "Attachment:\終極無人島魚影.bmp", 1, x3, y3
+        End If
+        // leftzone  = 316, 265, 357, 384
+        // rightzone = 566, 265, 606, 384
+        /*
+        zone Purple = 310,230 - 613,417   (judge zone)
+		zone Green = 420,230 - 503,417
+		zone Yellow = 311,290 - 614,354
+		zone Red = 340,266 - 587,382
+		zone Blue = 375,246 - 551,403
+        */
+        If (x1 > 0 and y1 > 0)Then
+            'a = 462 - x1
+            'b = 321 - y1
+            'If (a^2+b^2)^0.5 < distance or (x1>=330 and x1<=357 and y1>=285 and y1<=364) or (x1>=566 and x1<=593 and y1>=285 and y1<=364) then 
+            If (x1>=420 and x1<=503 and y1>=230 and y1<=417) or (x1>=311 and x1<=614 and y1>=290 and y1<=354) or (x1>=340 and x1<=587 and y1>=266 and y1<=382) or (x1>=375 and x1<=551 and y1>=246 and y1<=403) then 
+                LeftClick clicks
+                Goto ReCapture
+            End If
+        ELSEIF (x2 > 0 and y2 > 0)Then  ' 如果釣到魚神，範圍要盡可能保守一點(減少5)
+            'a = 462 - x2
+            'b = 321 - y2
+            'If (a^2+b^2)^0.5 < 85 or (x2>=335 and x2<=357 and y2>=290 and y2<=359) or (x2>=566 and x2<=581 and y2>=290 and y2<=359) then 
+			/*
+			zone Purple = 320,236 - 607,415   (judge zone)
+			zone Green = 415,236 - 521,415
+			zone Yellow = 320,287 - 608,360
+			zone Red = 351,266 - 577,385
+			zone Blue = 384,249 - 550,402
+			*/
+            If (x2>=415 and x2<=521 and y2>=236 and y2<=415) or (x2>=320 and x2<=608 and y2>=287 and y2<=360) or (x2>=351 and x2<=577 and y2>=266 and y2<=385) or (x2>=384 and x2<=550 and y2>=249 and y2<=402) then 
+                LeftClick clicks
+                Goto ReCapture
+            End If
+            //        ELSEIF x3 > 0 and y3 > 0 Then 
+            //            a = 462 - x3
+            //            b = 321 - y3
+            //            If (a^2+b^2)^0.5 < distance or (x3>=330 and x3<=357 and y3>=285 and y3<=364) or (x3>=566 and x3<=586 and y3>=285 and y3<=364) then 
+            //                LeftClick clicks
+            //                Goto ReCapture
+            //            End If
+        End If
+        currentTime = Plugin.Sys.GetDateTime()
+        clickDuringSecond = DateDiff("s", clickStartTime, currentTime)
+        // 防OK還沒出來就當機的情況
+        If clickDuringSecond > 35 Then 
+            TracePrint Plugin.Sys.GetDateTime() & " " & "Brown farm timeout: " & DateDiff("s", currentTime, clickStartTime)
+            Call TryToLeaveBrownFarmBySwitch
+            Call TryToStartBrownFarm_CatBoss
+            Call TryToMoveToFishingField
+            Goto ClickFishingEnd
+        End If
+        // 用以判斷離開時間
+        If clickDuringSecond > 6 Then 
+            FindPic 445, 45, 495, 125, "Attachment:\釣魚血條-去背.bmp", 0.8, x, y
+            If x < 0 and y < 0 Then 
+                FindPic 100, 200, 860, 500, "Attachment:\黃OK.bmp", 0.8, x3, y3
+                ' 通關成功的時候離開
+                If x3 > 0 and y3 > 0 Then 
+                    Call MoveLeftClick (x3 + 200, y3 + 27)
+                    Delay 200
+                    Call MoveLeftClick (x3 + 82, y3 + 30)
+                    Delay 1000
+                    //            		TracePrint Plugin.Sys.GetDateTime() & " " & "ClickFishing normally end."
+                    Goto ClickFishingEnd
+                End If
+                ' 通關失敗的時候離開
+                FindPic 100, 200, 860, 500, "Attachment:\否2.bmp", 0.8, x4, y4
+                If x4 > 0 and y4 > 0 Then 
+                    MoveTo x4 + 63, y4 + 26
+                    LeftClick 1
+                    Delay 500
+                    MoveTo 100, 100
+                    //            		TracePrint Plugin.Sys.GetDateTime() & " " & "Fish is tough, not normally end."
+                    Goto ClickFishingEnd
+                End If
+            Else 
+                //                TracePrint Plugin.Sys.GetDateTime() & " " & "釣魚血條-去背.bmp is find, contiunue clicking."
+                Goto ReCapture
+            End If
+        End If
+    Wend
+    Rem ClickFishingEnd
+    TracePrint Plugin.Sys.GetDateTime() & " " & "ClickFishing end."
+End Function
+Function TryToMoveToFishingField
+    MoveTo 460, 260
+    Delay 100
+    KeyDown "Ctrl", 1
+    MouseWheel -3
+    Delay 500
+    MouseWheel -3
+    Delay 500
+    MouseWheel -3
+    Delay 500
+    MouseWheel -3
+    Delay 500
+    MouseWheel -3
+    Delay 500
+    KeyUp "Ctrl", 1
+    Delay 500
+    MoveTo 820, 440
+    Delay 100
+    LeftDown 1
+    Call DragToRef(-650 , -350 , 20, 20)
+    LeftUp 1
+    Delay 1000
+    Rem ReZoomOut_zone
+    MoveTo 820, 440
+    Delay 100
+    LeftDown 1
+    Call DragToRef(-650 , -350 , 20, 20)
+    LeftUp 1
+    Delay 1000
+    MoveTo 460, 260
+    Delay 100
+    KeyDown "Ctrl", 1
+    MouseWheel -3
+    Delay 500
+    KeyUp "Ctrl", 1
+    Delay 1000
+    FindPic 300, 0, 960, 540, "Attachment:\雷納德的平台.bmp", 0.75, x, y
+    If x > 0 and y > 0 Then 
+        Call MoveLeftClick(x - 54, y + 85)
+        Delay 2000
+        //        MoveTo 460, 360
+        //        Delay 1000
+        //        LeftClick 1
+        //        Delay 1000
+        //        LeftClick 1
+        //        Delay 1000
+        //        LeftClick 1
+        //        Delay 1000
+        //        LeftClick 1
+        //        Delay 8000
+        //		Call TryToGetInStage
+        FindPic 200, 100, 760, 440, "Attachment:\立刻出發.bmp", 0.75, x, y
+        If x > 0 and y > 0 Then 
+            Call MoveLeftClick(x + 48, y + 17)
+            Delay 1000
+            LeftClick 1
+            Delay 1000
+            LeftClick 1
+            Delay 1000
+            LeftClick 1
+            Delay 1000
+            LeftClick 1
+            Delay 1000
+            LeftClick 1
+            Delay 4000
+            Call TryToGetInStage(fishingZone)
+        Else 
+            TracePrint Plugin.Sys.GetDateTime() & " " & "Can not find 立刻出發.bmp, unknown reason."
+        End If
+    Else 
+        TracePrint Plugin.Sys.GetDateTime() & " " & "Can not find 雷納德的平台.bmp, GoTo ReZoomOut_zone for checking."
+        Delay 1000
+        Goto ReZoomOut_zone
+    End if
+End Function
+Function TryToGetInStage(zone)
+    Rem ReCheckLINE樂園
+    setZone(zone)
+    //    FindPic xStart, yStart, xEnd, yEnd, "Attachment:\LINE樂園.bmp", 0.7, x, y
+    FindPic xStart, yStart, xEnd, yEnd, mainIsland, 0.7, x, y
+    If x > 0 and y > 0 Then 
+        Call MoveLeftClick(x + 50, y + 114)
+        Delay 1000
+        //        call MoveLeftDown (xStart+720, yStart+450)
+        //        Call DragToRef(-280 , 0, 5, 140)
+        //        LeftUp 1
+        MoveTo 100, 100
+        Rem ReCheck
+        Delay 2000
+        FindPic xStart+100, yStart+100, xStart+860, yStart+440, FishingArea, 0.9, x, y
+        If x > 0 and y > 0 Then 
+            Call MoveLeftClick(x + 40, y + 40)				// clickStage
+            Delay 1500
+            Rem ReCheckEnterStage
+            FindPic xStart+0, yStart+200, xEnd, yEnd, "Attachment:\黃底藍箭頭.bmp", 0.75, x, y
+            If x > 0 and y > 0 Then 
+                TracePrint Plugin.Sys.GetDateTime() & " " & "黃底藍箭頭.bmp is find, try to enter stage."
+                Call MoveLeftClick(x + 24, y + 24)
+                Delay 3000
+                FindPic 0, 0, 960, 540, "Attachment:\開始釣魚.bmp", 0.85, x, y
+                If x > 0 and y > 0 Then 
+                    TracePrint Plugin.Sys.GetDateTime() & " " & "成功進到釣魚區！！！"
+                    currentCatBossArea = 3
+                End If
+            Else 
+                TracePrint Plugin.Sys.GetDateTime() & " " & "Can not find 黃底藍箭頭.bmp ... unknow reason."
+                MoveTo xStart+720, yStart+450
+                LeftDown 1
+                Delay 200
+                Call DragToRef(-100 , 0, 30, 20)
+                LeftUp 1
+                Delay 1000
+                MoveTo 100, 100
+                Delay 200
+                Goto ReCheckEnterStage
+            end if	
+        Else 
+            TracePrint Plugin.Sys.GetDateTime() & " " & "Can not find " & FishingArea & " ... unknow reason."
+            MoveTo xStart+720, yStart+450
+            LeftDown 1
+            Delay 500
+            Call DragToRef(-120 , 0, 10, 40)
+            LeftUp 1
+            MoveTo 100, 100
+            Goto ReCheck
+        End If
+    Else 
+        TracePrint Plugin.Sys.GetDateTime() & " " & "Can not find LINE樂園.bmp, Delay 2000 and Goto ReCheckLINE樂園 for recheck."
+        Call TryToResizingAllNox
+        Delay 2000
+        MoveLeftClick xStart + 300, yStart + 20
+        Goto ReCheckLINE樂園
+    End if
+End Function
+//-------------------Fish process------------------------
+//-------------------Auto Plotting------------------------
+Function clearFurits(zone)
+    //    Call cleanSpecificPlots("Attachment:\陳列-馬玲薯.bmp", "Attachment:\馬玲薯10顆.bmp", zone)
+    //    Call cleanSpecificPlots("Attachment:\陳列-蘋果.bmp", "Attachment:\蘋果10顆.bmp", zone)
+    Call cleanSpecificPlots("Attachment:\陳列-咖啡豆.bmp", "Attachment:\咖啡豆10顆.bmp", zone)
+    Call cleanSpecificPlots("Attachment:\陳列-可可豆.bmp", "Attachment:\可可豆10顆.bmp", zone)
+    Call cleanSpecificPlots("Attachment:\陳列-葡萄.bmp", "Attachment:\葡萄10顆.bmp", zone)
+    Delay 200
+    FindPic xStart, yStart, xEnd, yEnd, "Attachment:\回車鍵_x42y43.bmp", 0.85, x , y 
+    MoveLeftClick x+ 21, y + 22
+End Function
+Function plottingProcess(curZone)
+    if curZone = 1 then
+        curTime_s = Plugin.Sys.GetTime / 1000
+        TracePrint "zone1plottedTime = " & zone1plottedTime
+        If zone1plottedTime <> 0 Then 
+            zone1_plottedOverSeconds = curTime_s - zone1plottedTime
+            TracePrint "zone1_plottedOverSeconds = " & zone1_plottedOverSeconds & " seconds."
+        End If
+        If zone1plottedTime = 0 or zone1_plottedOverSeconds > plotOverTime Then 
+            Call find貨車小屋頂(curZone)
+            Call auto收成(curZone)
+            Delay 500
+            Call auto種植(plotTarget, curZone)
+            Delay 500
+            Call auto賣植物("Attachment:\豆子-中心.bmp", curZone)
+            Delay 500
+        End If
+    ElseIf curZone = 2 then
+        curTime_s = Plugin.Sys.GetTime / 1000
+        TracePrint "zone2plottedTime = " & zone2plottedTime
+        If zone2plottedTime <> 0 Then 
+            zone2_plottedOverSeconds = curTime_s - zone2plottedTime
+            TracePrint "zone2_plottedOverSeconds = " & zone2_plottedOverSeconds & " seconds."
+        End If
+        If zone2plottedTime = 0 or zone2_plottedOverSeconds > plotOverTime Then 
+            Call find貨車小屋頂(curZone)
+            Call auto收成(curZone)
+            Delay 500
+            Call auto種植(plotTarget, curZone)
+            Delay 500
+            Call auto賣植物("Attachment:\豆子-中心.bmp", curZone)
+            Delay 500
+        End If
+    ElseIf curZone = 3 then
+        curTime_s = Plugin.Sys.GetTime / 1000
+        TracePrint "zone3plottedTime = " & zone3plottedTime
+        If zone3plottedTime <> 0 Then 
+            zone3_plottedOverSeconds = curTime_s - zone3plottedTime
+            TracePrint "zone3_plottedOverSeconds = " & zone3_plottedOverSeconds & " seconds."
+        End If
+        If zone3plottedTime = 0 or zone3_plottedOverSeconds > plotOverTime Then 
+            Call find貨車小屋頂(curZone)
+            Call auto收成(curZone)
+            Delay 500
+            Call auto種植(plotTarget, curZone)
+            Delay 500
+            Call auto賣植物("Attachment:\豆子-中心.bmp", curZone)
+            Delay 500
+        End If
+    elseif curZone = 4 then
+        curTime_s = Plugin.Sys.GetTime / 1000
+        TracePrint "zone4plottedTime = " & zone4plottedTime
+        If zone4plottedTime <> 0 Then 
+            zone4_plottedOverSeconds = curTime_s - zone4plottedTime
+            TracePrint "zone4_plottedOverSeconds = " & zone4_plottedOverSeconds & " seconds."
+        End If
+        If zone4plottedTime = 0 or zone4_plottedOverSeconds > plotOverTime Then 
+            Call find貨車小屋頂(curZone)
+            Call auto收成(curZone)
+            Delay 500
+            Call auto種植(plotTarget, curZone)
+            Delay 500
+            Call auto賣植物("Attachment:\豆子-中心.bmp", curZone)
+            Delay 500
+        End If
+    End If
+End Function
+Function cleanSpecificPlots(plotPicName, plotX10PicName, zone)
+    TracePrint Plugin.sys.GetDateTime & "   cleanSpecificPlots(" & plotPicName & ", " & zone & ") is starting."
+    setZone (zone)
+    Delay 1000
+    FindPic xStart, yStart, xEnd, yEnd, "Attachment:\販賣舖-背景.bmp", 0.9, x, y
+    If x < 0 and y < 0 Then 
+        TracePrint "不在販賣舖，放棄賣東西 ...  !!!!"
+        TracePrint Plugin.sys.GetDateTime & "   cleanSpecificPlots(" & plotPicName & ", " & zone & ") is abort."
+        Goto sellAbort
+    End If
+    inBarTab = false
+    dragCnt = 0
+    Rem recheck
+    FindPic xStart, yStart, xEnd, yEnd, "Attachment:\叉叉_x50y50.bmp", 0.8, x, y
+    If x>0 and y>0 then
+        MoveLeftClick x + 25, y + 25
+        Delay 500
+    End If
+    Call TryToCleanSlot("Attachment:\已售出.bmp", zone)
+    Call TryToCleanSlot("Attachment:\已售出2.bmp", zone)
+    Delay 300
+    FindPic xStart, yStart, xEnd, yEnd, "Attachment:\空格子.bmp", 0.8, x, y
+    If x > 0 and y > 0 Then 
+        MoveLeftClick x + 43, y + 39
+        If inBarTab=false then
+            Delay 500
+            FindPic xStart, yStart, xEnd, yEnd, "Attachment:\貨倉-按下.bmp", 0.8, x, y	// 如果貨倉是按下的，要移到穀倉去
+            If x > 0 and y > 0 Then 
+                MoveLeftClick x + 102, y + 30		// 要移到穀倉去，點下
+                inBarTab = true
+            Else 
+                inBarTab = true
+            End If
+        End if
+        MoveTo xStart + 100, yStart +100
+        Delay 300
+        Rem reFinding
+        FindPic xStart, yStart, xEnd, yEnd, plotPicName, 0.7, x, y   // 找特定農作物
+        If x > 0 and y > 0 Then 
+            MoveLeftClick x + 30, y + 20
+            Delay 300
+            Rem reCheckCoin
+            FindPic xStart, yStart, xEnd, yEnd, plotX10PicName, 1, plotX10x, plotX10y
+            If plotX10x < 0 and plotX10y < 0 Then 
+                TracePrint plotPicName & "數量不足10個!!... 或是解析度跑掉了?.. Goto sellCompleted"
+                MoveLeftClick xStart + 758, yStart + 111
+                Goto sellCompleted
+            End If
+            FindPic xStart, yStart, xEnd, yEnd, "Attachment:\金幣icon.bmp", 0.8, x, y
+            If x > 0 and y > 0 Then 
+                MoveLeftDown x+128, y+17				// 金幣與右邊加號的相對距離
+                call delayToMaxPrice
+                LeftUp 1
+                MoveLeftClick x +43 , y + 188			// 金幣與賣出鍵相對距離
+                Delay 100
+                dragCnt = 0
+                Goto recheck
+            Else 
+                TracePrint "金幣icon.bmp 沒找到, 再找找試試看!! .....試著調整解析度"
+                call TryToResizingAllNox
+                Delay 1000
+                Goto reCheckCoin
+            End If
+        ElseIf dragCnt > 3 Then
+            TracePrint PicName & "  沒3次都沒找到，應該是賣光了! ... Goto sellCompleted"
+            FindPic xStart, yStart, xEnd, yEnd, "Attachment:\叉叉_x50y50.bmp", 0.9, x, y
+            MoveLeftClick x, y
+            Delay 200
+            Goto sellCompleted
+        Else 
+            TracePrint PicName & " 沒找到，試著往下找 ..."
+            // 295, 450
+            MoveLeftDown xStart + 295, yStart + 450
+            Delay 100
+            DragToRef 0, - 120 , 5, 30
+            Delay 100
+            LeftUp 1
+            Delay 400
+            LeftClick 2
+            Delay 500
+            dragCnt = dragCnt + 1 
+            Goto reFinding
+        End If
+    Else 
+        TracePrint "空格子.bmp 沒找到，或許移到拖曳到右邊再試試 ..."
+        MoveTo xStart+650, yStart+180
+        LeftDown 1
+        Delay 300
+        DragToRef - 250 , 0, 20, 40
+        Delay 300
+        LeftUp 1
+        Delay 2000
+        retryCnt = retryCnt + 1
+        If retryCnt >= 10 Then 
+            TracePrint "拖曳了10次都沒找到 空格子.bmp，真的沒有空格子 ... Goto sellCompleted"
+            Goto sellCompleted
+        Else 
+            Goto recheck
+        End If
+    End if
+    Rem sellCompleted
+    TracePrint Plugin.sys.GetDateTime & "   cleanSpecificPlots(" & plotPicName & ", " & zone & ") is completed."
+    Rem sellAbort
+End Function
+Function SellHighPriceProcess(picName, zone)
+    setZone zone
+    TracePrint Plugin.Sys.GetDateTime() & " " & "SellHighPriceProcess start." 
+    For 2
+        FindPic xStart, yStart, xEnd, yEnd, "Attachment:\空格子.bmp", 0.8, x, y
+        MoveLeftClick x + 43, y + 39
+        MoveTo 1060, 100
+        Delay 300
+        FindPic xStart, yStart, xEnd, yEnd, "Attachment:\字-陳列商品.bmp", 0.7, x, y
+        If x < 0 and y < 0 Then 
+            FindPic xStart, yStart, xEnd, yEnd, "Attachment:\字-陳列商品2.bmp", 0.7, x, y
+            If x < 0 and y < 0 Then 
+                MsgBox "字-陳列商品2.bmp " & 沒找到
+            End If
+        End If
+        FindPic xStart, yStart, xEnd, yEnd, picName, 0.7, x, y
+        If x < 0 and y < 0 Then 
+            TracePrint picName & 沒找到
+        Else 
+            MoveLeftClick x + 12, y + 11		// 點擊目標圖片，準備進行販賣動作
+        End if
+        MoveTo xStart + 100, yStart + 100
+        Delay 300
+        FindPic 960, 0, 1920, 540, "Attachment:\廣告勾勾.bmp", 0.8, x, y
+        MoveLeftClick x+24, y+24
+        MoveLeftDown x+20, y-60 
+        Delay 5100
+        LeftUp 1
+        //		Delay 200
+        MoveLeftClick x - 66, y + 117
+        Delay 200
+        MoveTo 1060, 100
+        Delay 200
+    Next
+    TracePrint Plugin.Sys.GetDateTime() & " " & "SellHighPriceProcess start." 
+End Function
+Function TryToCleanSlot(itemName, zone)
+    setZone zone
+    Rem ReCheckItem
+    FindPic xStart, yStart+250, xEnd, yEnd-50, itemName, 0.75, x, y
+    If x > 0 and y > 0 Then 
+        Call MoveLeftClick(x + 35, y - 65)
+        Delay 200
+        //        MoveTo xStart+100, yStart+100
+        Goto ReCheckItem
+    End If
+End Function
+Function plotStatusJudging
+    Rem judgeStart
+    FindPic xStart, yStart, xEnd, yEnd, plotTarget, 0.7, plotX, plotY
+    If plotX < 0 and plotY < 0 Then 
+        TracePrint plotTarget & "沒找到 ! 驗證狀態中 ... "
+        FindPic xStart, yStart, xEnd, yEnd, "Attachment:\熊掌1.bmp", 0.7, bearX, bearY
+        If bearX < 0 and bearY < 0 Then 
+            FindPic xStart, yStart, xEnd, yEnd, "Attachment:\熊掌2.bmp", 0.7, bearX, bearY
+            If bearX < 0 and bearY < 0 Then 
+                FindPic xStart, yStart, xEnd, yEnd, "Attachment:\熊掌3.bmp", 0.7, bearX, bearY
+                If bearX < 0 and bearY < 0 Then 
+                    TracePrint "熊掌 3 張都找不到 ! "
+                Else 
+                    TracePrint "熊掌3.bmp 找到了!!"
+                    Goto JudgeEnd
+                End if
+            Else 
+                TracePrint "熊掌2.bmp 找到了!!"
+                Goto JudgeEnd
+            End If
+        Else 
+            TracePrint "熊掌1.bmp 找到了!!"
+            Goto JudgeEnd
+        End If
+        FindPic xStart, yStart, xEnd, yEnd, "Attachment:\閃電1.bmp", 0.7, growIingconX, growIingconY
+        If growIingconX < 0 and growIingconY < 0 Then 
+            FindPic xStart, yStart, xEnd, yEnd, "Attachment:\閃電2.bmp", 0.7, growIingconX, growIingconY
+            If growIingconX < 0 and growIingconY < 0 Then 
+                FindPic xStart, yStart, xEnd, yEnd, "Attachment:\閃電3.bmp", 0.7, growIingconX, growIingconY
+                If growIingconX < 0 and growIingconY < 0 Then 
+                    FindPic xStart, yStart, xEnd, yEnd, "Attachment:\鑽石1.bmp", 0.7, growIingconX, growIingconY
+                    If growIingconX < 0 and growIingconY < 0 Then 
+                        FindPic xStart, yStart, xEnd, yEnd, "Attachment:\鑽石2.bmp", 0.7, growIingconX, growIingconY
+                        If growIingconX < 0 and growIingconY < 0 Then 
+                            FindPic xStart, yStart, xEnd, yEnd, "Attachment:\鑽石3.bmp", 0.7, growIingconX, growIingconY
+                            If growIingconX < 0 and growIingconY < 0 Then 
+                                TracePrint Plugin.sys.GetDateTime & ", 鑽石與閃電都找不到!! try to ZoomOut!"
+                                Call ZoomOut_zone(center_X, center_Y, 3)
+                                TracePrint Plugin.sys.GetDateTime & ", TryToResizingAllNox!"
+                                Call TryToResizingAllNox
+                                TracePrint Plugin.sys.GetDateTime & ", Goto judgeStart for recheck!"
+                                Goto judgeStart
+                                //    							MsgBox "鑽石與閃電都找不到!!"
+                            Else 
+                                TracePrint "鑽石3.bmp 找到了!!"
+                                Goto JudgeEnd
+                            End If
+                        Else 
+                            TracePrint "鑽石2.bmp 找到了!!"
+                            Goto JudgeEnd
+                        End If
+                    Else 
+                        TracePrint "鑽石1.bmp 找到了!!"
+                        Goto JudgeEnd
+                    End If
+                Else 
+                    TracePrint "閃電3.bmp 找到了!!"
+                    Goto JudgeEnd
+                End If
+            Else 
+                TracePrint "閃電2.bmp 找到了!!"
+                Goto JudgeEnd
+            End If
+        Else 
+            TracePrint "閃電1.bmp 找到了!!"
+            Goto JudgeEnd
+        End If
+        Rem JudgeEnd
+        TracePrint "plotStatusJudging End."
+    Else 
+        TracePrint plotTarget & "找到了!! 可以準備種植了 ... "
+    End If
+End Function
+Function auto種植(picName, zone)
+    TracePrint Plugin.Sys.GetDateTime() & "  " & "auto種植 start." 
+    Call setZone(zone)
+    Rem reChecking
+    Call find貨車小屋頂(zone)
+    Delay 1000
+    MoveLeftClick x中心田, y中心田
+    Delay 1000
+    call find貨車小屋頂(zone)			// 因為點擊田的時候，可能會位移，因此需要重新找定位點
+    Delay 1000
+    ' 此時可能會有三種狀況: 
+    ' 		狀況1: "熊掌" = 可以收成
+    '					    -> 收成完之後再種
+    ' 		狀況2: "作物" =     空田 => 種植
+    ' 		狀況3: "鑽石"或"閃電" =   種植中 => 刷新種植時間
+    '		狀況4: 忘記翻到第1頁 (-268, -72) -> 相對於田地，第1頁的位置
+    Call plotStatusJudging
+    // 狀況2: "作物"
+    If plotX > 0 and plotY > 0 then
+        MoveLeftDown plotX + 14, plotY + 14		// 移到植物圖片的位置，相對位置 +14, +14
+        Delay 100
+        //		MoveTo x中心田, y中心田
+        DragToAbs x中心田+10, y中心田+5, speed_種植+5, 60
+        Delay 300
+        DragToAbs x右下田+3, y右下田+13, speed_種植+5, 60
+        Delay 300
+        dragCircle 7, speed_種植+5
+        LeftUp 1
+        curDateTime = Plugin.sys.getDateTime
+        If zone = 1 Then 
+            zone1plottedTime = Plugin.Sys.GetTime / 1000
+            TracePrint curDateTime & "(" & zone1plottedTime & ")" & ", zone(" & zone & ") finished plotting job."
+        ElseIf zone = 2 Then
+            zone2plottedTime = Plugin.Sys.GetTime / 1000
+            TracePrint curDateTime & "(" & zone2plottedTime & ")" & ", zone(" & zone & ") finished plotting job."
+        ElseIf zone = 3 Then
+            zone3plottedTime = Plugin.Sys.GetTime / 1000
+            TracePrint curDateTime & "(" & zone3plottedTime & ")" & ", zone(" & zone & ") finished plotting job."
+        ElseIf zone = 4 Then
+            zone4plottedTime = Plugin.Sys.GetTime / 1000
+            TracePrint curDateTime & "(" & zone4plottedTime & ")" & ", zone(" & zone & ") finished plotting job."
+        Else 
+            MsgBox "ERROR! zone out of 1234."
+        End If
+        isAlready收成或種植 = true
+        // 狀況1: "熊掌"
+    ElseIf bearX > 0 and bearY > 0 Then
+        x熊掌心 = bearX + 27
+        y熊掌心 = bearY + 27
+        MoveLeftDown x熊掌心, y熊掌心
+        Delay 300
+        DragToAbs x右下田, y右下田, speed_收成, 40
+        Delay 300
+        dragCircle 7, speed_收成
+        LeftUp 1
+        Delay 500
+        MoveLeftClick xStart + 100, yStart + 25
+        isAlready收成或種植 = true
+        Goto reChecking
+        // 狀況3: "鑽石"或"閃電"   作物成長中 ...
+    Elseif  growIingconX>0 and growIingconY>0 then
+        TracePrint Plugin.sys.GetDateTime & ", zone(" & zone & ") " & picName & "沒找到 ... "
+        MoveLeftClick x屋頂中心, y屋頂中心
+    Else 
+        MsgBox "Unknown condition???"
+    End If
+    TracePrint Plugin.Sys.GetDateTime() & "  " & "auto種植 end." 
+End Function
+Function find貨車小屋頂(zone)
+    setZone (zone)
+    Rem recheck
+    FindPic xStart, yStart, xEnd, yEnd, "Attachment:\貨車小屋頂.bmp", 0.7, x, y
+    If x < 0 and y < 0 Then 
+        FindPic xStart, yStart, xEnd, yEnd, "Attachment:\貨車小屋頂2.bmp", 0.7, x, y
+        If x < 0 and y < 0 Then 
+            FindPic xStart, yStart, xEnd, yEnd, "Attachment:\貨車小屋頂3.bmp", 0.7, x, y
+            If x < 0 and y < 0 Then 
+                FindPic xStart, yStart, xEnd, yEnd, "Attachment:\貨車小屋頂4.bmp", 0.7, x, y
+                If x < 0 and y < 0 Then 
+                    FindPic xStart, yStart, xEnd, yEnd, "Attachment:\貨車小屋頂5.bmp", 0.7, x, y
+                    If x < 0 and y < 0 Then 
+                        FindPic xStart, yStart, xEnd, yEnd, "Attachment:\貨車小屋頂6.bmp", 0.7, x, y
+                        If x < 0 and y < 0 Then 
+                            FindPic xStart, yStart, xEnd, yEnd, "Attachment:\貨車小屋頂7.bmp", 0.7, x, y
+                            If x < 0 and y < 0 Then 
+                                TracePrint "貨車小屋頂 7 張都找不到 !! try to zoom out and recheck. 或許剛好升級？try to click OK."
+                                Call CheckClickOK
+                                Delay 1000
+                                Call ZoomOut_zone(center_X, center_Y-100, 3)
+                                Goto recheck
+                            Else 
+                                TracePrint "貨車小屋頂7.bmp is found." 
+                            End If
+                        Else 
+                            TracePrint "貨車小屋頂6.bmp is found." 
+                        End if
+                    Else 
+                        TracePrint "貨車小屋頂5.bmp is found." 
+                    End If
+                Else 
+                    TracePrint "貨車小屋頂4.bmp is found." 
+                End If
+            Else 
+                TracePrint "貨車小屋頂3.bmp is found." 
+            End If
+        Else 
+            TracePrint "貨車小屋頂2.bmp is found." 
+        End If
+    Else 
+        TracePrint "貨車小屋頂2.bmp is found." 
+    End If
+    If x > 0 and y > 0 Then 
+        x屋頂中心 = x + 15
+        y屋頂中心 = y + 15
+        //        TracePrint "x屋頂中心 = " & x屋頂中心
+        //        TracePrint "y屋頂中心 = " & y屋頂中心
+        //        MoveTo x屋頂中心, y屋頂中心
+        // 24, -89       	-> 貨車小屋頂.bmp 相對於 中間往上數第4格 的位置(田中心)
+        x中心田 = x + 24
+        y中心田 = y - 89
+        //        TracePrint "x中心田 = " & x中心田
+        //        TracePrint "y中心田 = " & y中心田
+        //        MoveTo x中心田, y中心田
+        // 121, 32       	-> 貨車小屋頂.bmp 相對於 右下角田 的位置(右下田)
+        x右下田 = x + 121
+        y右下田 = y + 32
+        //        TracePrint "x右下田 = " & x右下田
+        //        TracePrint "y右下田 = " & y右下田
+        //        MoveTo x右下田, y右下田
+        // -326, -100		-> 貨車小屋頂.bmp 相對於 販賣舖 的位置(販賣舖)
+        x販賣舖 = x - 326
+        y販賣舖 = y - 100
+        //        TracePrint "x販賣舖 = " & x販賣舖
+        //        TracePrint "y販賣舖 = " & y販賣舖
+        //        MoveTo x販賣舖, y販賣舖
+        // 73, 52   		-> 貨車旁的空木柱
+        x空木柱 = x + 73
+        y空木柱 = y + 52
+        //        TracePrint "x空木柱 = " & x空木柱
+        //        TracePrint "y空木柱 = " & y空木柱
+        //        MoveTo x空木柱, y空木柱
+    Else 
+        MsgBox "5張 貨車小屋頂.bmp" & "都沒找到!!!!"
+    End If
+End Function
+Function auto收成(zone)
+    TracePrint Plugin.Sys.GetDateTime() & "  " & "auto收成 start." 
+    isAlready收成或種植 = false
+    Call setZone(zone)
+    Call find貨車小屋頂(zone)
+    Delay 500
+    //    TracePrint "x中心田 = " & x中心田
+    //    TracePrint "y中心田 = " & y中心田
+    call MoveLeftClick (x中心田, y中心田)	// 點擊 中心田
+    Delay 300
+    ' 此時可能會有三種狀況: 
+    ' 		狀況1 "熊掌" = 可以收成
+    ' 		狀況2 "作物" = 不做事離開
+    '			-> 有可能頁籤放錯
+    ' 		狀況3 "鑽石" =   種植中 => 刷新種植時間
+    call plotStatusJudging
+    //    MoveTo x右下田 - 94, y右下田 - 51		// 移到熊掌的位置，相對位置 -94, -51
+    //    LeftDown 1
+    //    Delay 100
+    //    DragToRef 94, 51, 20, 20
+    //    dragCircle 7, speed_收成
+    //    LeftUp 1
+    // 狀況2 "作物" = 不做事離開
+    If plotX > 0 and plotY > 0 then
+        MoveLeftClick x空木柱, y空木柱
+        // 狀況1: "熊掌"
+    ElseIf bearX > 0 and bearY > 0 Then
+        x熊掌心 = bearX + 27
+        y熊掌心 = bearY + 27
+        MoveLeftDown x熊掌心, y熊掌心
+        Delay 300
+        DragToAbs x右下田, y右下田, speed_收成, 60
+        Delay 300
+        dragCircle 7, speed_收成+5
+        LeftUp 1
+        Delay 500
+        MoveTo xStart + 100, yStart + 25
+        isAlready收成或種植 = true
+        // 狀況3: "鑽石"或"閃電"   作物成長中 ...
+    Elseif  growIingconX>0 and growIingconY>0 then
+        TracePrint Plugin.sys.GetDateTime & ", zone(" & zone & ") " & picName & "沒找到 ... "
+        MoveLeftClick x屋頂中心, y屋頂中心
+    Else 
+        MsgBox "Unknown condition???"
+    End If
+    TracePrint Plugin.Sys.GetDateTime() & "  " & "auto收成 end." 
+End Function
+Function dragCircle(times, frameSpeed)
+    For i = 0 To times
+        Call moveRefenceDistance("LT", 9, frameSpeed)
+        Call moveRefenceDistance("RT", 1, frameSpeed)
+        Call moveRefenceDistance("RB", 9, frameSpeed)
+        Call moveRefenceDistance("RT", 1, frameSpeed)
+    Next
+End Function
+Function moveRefenceDistance(direction, col_offset, frameSpeed)
+    If direction = "RB" Then 
+        ' X+ Y+   usually offset = 9
+        Call DragToRef(offsetX*(+col_offset), offsetY*(+col_offset), frameSpeed, 60)
+    ElseIf direction = "RT" Then
+        ' X+ Y-   usually offset = 1, but maybe no possible to execute.
+        Call DragToRef(offsetX*(+col_offset), offsetY*(-col_offset), frameSpeed, 10)
+    ElseIf direction = "LB" Then
+        ' X- Y+   usually offset = 1
+        Call DragToRef(offsetX*(-col_offset), offsetY*(+col_offset), frameSpeed, 10)
+    ElseIf direction = "LT" Then
+        ' X- Y-   usually offset = 9
+        Call DragToRef(offsetX*(-col_offset), offsetY*(-col_offset), frameSpeed, 60)
+    Else 
+        MsgBox "Format error, pleae check."
+    End If
+    Delay 200
+End Function
+Function delayToMaxPrice
+    //	alreadyMaxPrice from 711,251 
+    //	alreadyMaxPrice  to  781,314 
+    time_cnt = 0
+    Rem delay100ms_ReCheck
+    time_cnt = time_cnt + 1
+    Delay 100
+    FindPic xStart + 711, yStart + 251, xEnd + 781, yEnd + 314, "Attachment:\alreadyMaxPrice1.bmp", 0.8, findX, findY
+    If findX < 0 and findY < 0 Then 
+        FindPic xStart + 711, yStart + 251, xEnd + 781, yEnd + 314, "Attachment:\alreadyMaxPrice2.bmp", 0.8, findX, findY
+    End If
+    If findX < 0 and findY < 0 Then 
+        FindPic xStart + 711, yStart + 251, xEnd + 781, yEnd + 314, "Attachment:\alreadyMaxPrice3.bmp", 0.8, findX, findY
+    End If
+    If findX < 0 and findY < 0 Then 
+        Goto delay100ms_ReCheck
+    Else 
+        TracePrint Plugin.sys.GetDateTime & ", Price already max, check " & time_cnt & " times."
+    End If
+End Function
+Function getIntoHomeMarket(zone)
+    If zone > 4 Then 
+        MsgBox "Error, only 1 to 4 are accepted, current value(" & zone& ") is out of scope!!"
+    End If
+    Call setZone(zone)
+    If x販賣舖 > 0 and y販賣舖 > 0 Then 
+        x = x販賣舖
+        y = y販賣舖
+        //	Else 
+        //		FindPic xStart, yStart, xEnd, yEnd, "Attachment:\販賣舖-背景.bmp", 0.9, atMarketX, atMarketY
+        //		If atMarketX > 0 and atMarketY > 0 Then 
+        //			TracePrint "已經在販賣舖裡了!!!"
+        //			Goto processEnd
+        //		End If
+    End If
+    If x>0 and y>0 then
+        MoveLeftClick x, y
+        MoveTo xStart +100, yStart +100
+        Delay 2500
+        Goto processEnd
+    Else 
+        TracePrint "x販賣舖 and y販賣舖 都沒找到!!"
+        MsgBox "x販賣舖 and y販賣舖 都沒找到!!"
+    End If
+    Rem processEnd
+End Function
+Function auto賣植物(picName, zone)
+    If isAlready收成或種植 = false Then 
+        TracePrint Plugin.Sys.GetDateTime() & "  " & "isAlready收成或種植 = false, ... goto sellAbort"
+        Goto sellAbort
+    End If
+    TracePrint Plugin.Sys.GetDateTime() & "  " & "auto賣植物 start." 
+    inBarTab = false
+    getIntoHomeMarket(zone)		// also to setZone
+    sellCnt = 0
+    retryCnt = 0 
+    Rem reCheckSelling
+    FindPic xStart, yStart, xEnd, yEnd, "Attachment:\叉叉_x50y50.bmp", 0.8, x, y
+    If x>0 and y>0 then
+        MoveLeftClick x + 25, y + 25
+        Delay 500
+    End if
+    Call TryToCleanSlot("Attachment:\已售出.bmp", zone)
+    Delay 200
+    Call TryToCleanSlot("Attachment:\已售出2.bmp", zone)
+    If sellCnt >= 20 Then
+        Goto sellFinished
+    End If
+    Delay 300
+    FindPic xStart, yStart, xEnd, yEnd, "Attachment:\空格子.bmp", 0.8, x, y
+    If x > 0 and y > 0 Then 
+        retryCnt = 0 
+        MoveLeftClick x + 43, y + 39
+        If inBarTab=false then
+            Delay 500
+            FindPic xStart, yStart, xEnd, yEnd, "Attachment:\貨倉-按下.bmp", 0.8, x, y	// 如果貨倉是按下的，要移到穀倉去
+            If x > 0 and y > 0 Then 
+                MoveLeftClick x + 102, y + 30		// 要移到穀倉去，點下
+                inBarTab = true
+            End If
+        End if
+        MoveTo xStart + 100, yStart +100
+        Delay 300
+        //        185, 185
+        //        515, 380
+        FindPic xStart+185, yStart+185, xStart+515, yStart+380, picName, 0.7, x, y   // 找豆子
+        //        FindPic xStart, yStart, xEnd, yEnd, picName, 0.7, x, y   // 找豆子
+        If x > 0 and y > 0 Then 
+            MoveLeftClick x + 12, y + 11
+            Delay 300
+            Rem recheckCoin
+            //          600, 250
+            //			660, 310
+            FindPic xStart + 600, yStart + 250, xStart + 660, yStart + 310, "Attachment:\金幣icon.bmp", 0.8, x, y
+            //            FindPic xStart, yStart, xEnd, yEnd, "Attachment:\金幣icon.bmp", 0.8, x, y
+            If x > 0 and y > 0 Then 
+                //						MoveLeftClick x + 24, y + 27
+                //						Delay 200
+                MoveLeftDown x+128, y+17				// 金幣與右邊加號的相對距離
+                call delayToMaxPrice
+                LeftUp 1
+                MoveLeftClick x +43 , y + 188			// 金幣與賣出鍵相對距離
+                //                    Delay 100
+                //                    MoveTo xStart + 100, yStart + 100
+                Delay 100
+                sellCnt = sellCnt +1
+                Goto reCheckSelling
+            Else 
+                TracePrint "金幣icon.bmp 沒找到!! 再確認 ... 試著重調解析度"
+                call TryToResizingAllNox
+                Delay 300
+                Goto recheckCoin
+            End If
+        Else 
+            TracePrint PicName & "沒找到，放棄賣出 ..."
+            Goto sellFinished
+        End If
+    Else 
+        TracePrint "空格子.bmp 沒找到，或許移到拖曳到右邊再試試 ..."
+        MoveTo xStart+650, yStart+180
+        LeftDown 1
+        Delay 300
+        DragToRef - 250 , 0, 20, 30
+        Delay 200
+        LeftUp 1
+        Delay 1500
+        retryCnt = retryCnt + 1
+        If retryCnt >= 5 Then 
+            TracePrint "拖曳了5次都沒找到 空格子.bmp，或許真的沒有空格子 ... Goto sellFinished"
+            Goto sellFinished
+        Else 
+            Goto reCheckSelling
+        End If
+    End if
+    Rem sellFinished
+    FindPic xStart, yStart, xEnd, yEnd, "Attachment:\叉叉_x50y50.bmp", 0.8, x, y
+    If x > 0 and y > 0 Then 
+        MoveLeftClick x + 25, y + 25
+        Delay 200
+    End If
+    FindPic xStart, yStart, xEnd, yEnd, "Attachment:\回車鍵_x42y43.bmp", 0.8, x, y
+    If x > 0 and y > 0 Then 
+        MoveLeftClick x+21, y +21
+    Else 
+        MsgBox "x販賣舖 y販賣舖 " & "找不到"
+    End If
+    TracePrint Plugin.Sys.GetDateTime() & "  auto賣植物 end."
+    Rem sellAbort
+End Function
+//-------------------Auto Plotting---------------------------
+//-------------------BF-Common------------------------------
+Function setZone(zone)
+    If zone = 1 Then 
+        Rem resetZone1
+        xStart = 0
+        yStart = 0
+        xEnd = xStart + nox_2x2Width
+        yEnd = yStart + nox_2x2Height
+    ElseIf zone = 2 Then
+        Rem resetZone2
+        xStart = 960
+        yStart = 0
+        xEnd = xStart + nox_2x2Width
+        yEnd = yStart + nox_2x2Height
+    ElseIf zone = 3 Then
+        Rem resetZone3
+        xStart = 0
+        yStart = 540
+        xEnd = xStart + nox_2x2Width
+        yEnd = yStart + nox_2x2Height
+    ElseIf zone = 4 Then
+        Rem resetZone4
+        xStart = 960
+        yStart = 540
+        xEnd = xStart + nox_2x2Width
+        yEnd = yStart + nox_2x2Height
+    Elseif zone=5 then		// selling zone in all
+        xStart = 480
+        yStart = 150
+        xEnd = 1820
+        yEnd = 930
+    Elseif zone=6 then		// full screen.
+        xStart = 0
+        yStart = 0
+        xEnd = xStart + nox_2x2Width * 2
+        yEnd = yStart + nox_2x2Height * 2
+    Elseif zone=7 then		// detect cursor zone and reset.
+        GetCursorPos cursorX, cursorY
+        If cursorX >= 0 and cursorX < 960 and cursorY >= 0 and cursorY < 540 Then 
+            Goto resetZone1
+        ElseIf cursorX >= 960 and cursorX < 1920 and cursorY >= 0 and cursorY < 540 Then
+            Goto resetZone2
+        ElseIf cursorX >= 0 and cursorX < 960 and cursorY >= 540 and cursorY < 1080 Then
+            Goto resetZone3
+        ElseIf cursorX >= 960 and cursorX < 1920 and cursorY >= 540 and cursorY < 1080 Then
+            Goto resetZone4
+        Else 
+            TracePrint "Error, cursor invalue????"
+            MsgBox "Error, cursor invalue????"
+        End If
+    ElseIf zone = 11 Then
+        Rem resetZone11
+        xStart = 0 + shrinkStartX
+        yStart = 0 + shrinkStartY
+        xEnd = xStart + shrinkEndX - shrinkStartX
+        yEnd = yStart + shrinkEndY - shrinkStartY
+    ElseIf zone = 22 Then
+        Rem resetZone22
+        xStart = 960 + shrinkStartX
+        yStart = 0 + shrinkStartY
+        xEnd = xStart + shrinkEndX - shrinkStartX
+        yEnd = yStart + shrinkEndY - shrinkStartY
+    ElseIf zone = 33 Then
+        Rem resetZone33
+        xStart = 0 + shrinkStartX
+        yStart = 540 + shrinkStartY
+        xEnd = xStart + shrinkEndX - shrinkStartX
+        yEnd = yStart + shrinkEndY - shrinkStartY
+    ElseIf zone = 44 Then
+        Rem resetZone44
+        xStart = 960 + shrinkStartX
+        yStart = 540 + shrinkStartY
+        xEnd = xStart + shrinkEndX - shrinkStartX
+        yEnd = yStart + shrinkEndY - shrinkStartY
+    Else 
+        TracePrint "Zone is invalid."
+        MsgBox "Zone is invalid."
+    End If
+    center_X = (xStart + xEnd) / 2
+    center_Y = (yStart + yEnd) / 2
+    //    dumpCurPositionInfo
+End Function
+Function dumpCurPositionInfo
+    TracePrint "Current zone(" & zone & ") info -> xStart = " & xStart & "     yStart = " & yStart & "     xEnd = " & xEnd & "     yEnd = " & yEnd
+End Function
+Function clickPartnerByPicture(picName, similarity)
+    FindPic xStart, yStart, xEnd, yEnd, picName, similarity, intX, intY
+    If intX > 0 And intY > 0 Then 
+        Call MoveLeftClick(intX + 11, intY + 7)
+        Delay 1500
+        needRecheck = true
+    	MoveTo xStart + 100, yStart + 100
+    	Delay 1000
+    End If
+    Delay 200
+End Function
+Function ZoomOut_zone(targetX, targetY, times)
+    TracePrint Plugin.Sys.GetDateTime() & " " & "ZoomOut_zone start!(" & targetX & ", " & targetY & ", " & times & ")"
+    dumpCurPositionInfo 
+    MoveTo targetX, targetY
+    setZone(7)
+    MoveLeftClick center_X, yStart + 10
+    Delay 500
+    MoveTo targetX, targetY
+    Delay 200
+    For times
+        KeyDown 17, 1
+        MouseWheel - 2 
+        Delay 300
+        MouseWheel - 2 
+        Delay 300
+        KeyUp 17, 1
+        Delay 1000
+    Next
+End Function
+Function NextPage(zone)
+    setZone(zone)
+    //    Call CheckPressOK
+    MoveLeftDown xStart+700, yStart+110
+    Call DragToRef (-300, 0, 10, 10)
+    LeftUp 1
+    Delay 200
+End Function
+Function CheckClickXXandBackspace(zone)
+    setZone(zone)
+    Rem ReCheckTodayAd
+    FindPic xStart, yStart, xEnd, yEnd, "Attachment:\叉叉_x50y50.bmp", 0.85, intX, intY
+    If intX > 0 And intY > 0 Then 
+        Call MoveLeftClick(intX + 25, intY + 25)
+        Delay 200
+        Goto ReCheckTodayAd
+    End If
+    FindPic xStart, yStart, xEnd, yEnd, "Attachment:\叉叉.bmp", 0.85, intX, intY
+    If intX > 0 And intY > 0 Then 
+        Call MoveLeftClick(intX + 13, intY + 13)
+        Delay 200
+        Goto ReCheckTodayAd
+    End If
+    FindPic xStart, yStart, xEnd, yEnd, "Attachment:\回車鍵_x42y43.bmp", 0.85, intX, intY
+    If intX > 0 And intY > 0 Then 
+        Call MoveLeftClick(intX + 20, intY + 20)
+        Delay 200
+        Goto ReCheckTodayAd
+    End If
+End Function
+Function CheckPressOK()
+    REM ReCheck
+    FindPic xStart+200, yStart+110, xStart+760, yStart+440, "Attachment:\OK_x128y51.bmp", 0.7, x, y
+    If x > 0 and y > 0 Then 
+        MoveLeftClick x + 65, y + 25
+        Delay 100
+        Goto ReCheck
+    End If
+End Function
+Function CheckBackspaceAndClick(zone)
+    setZone (zone)
+    Rem checkOut
+    FindPic xStart, yStart, xStart+300, yStart+300, "Attachment:\回車鍵_x42y43.bmp", 0.7, BackX, BackY
+    If BackX > 0 and BackY > 0 Then 
+        MoveLeftClick BackX + 21, BackY + 21
+        Goto checkOut
+    End If
+End Function
+Function CheckAndWaitBackspace(zone)
+    setZone (zone)
+    Rem reWaiting
+    BackX = - 1 
+    BackY = - 1 
+    Do Until (BackX>0 and BackY>0)
+        FindPic xStart, yStart, xStart+300, yStart+300, "Attachment:\回車鍵_x42y43.bmp", 0.7, BackX, BackY
+        Delay 100
+    Loop
+End Function
+Function waitUntilBackspace(zone)
+    TracePrint Plugin.Sys.GetDateTime() & " " & "waitUntilBackspace start."
+    setZone (zone)
+    reCheckedTimes = 0 
+    Rem reWaiting
+    FindPic xStart, yStart, xStart+300, yStart+300, "Attachment:\回車鍵_x42y43.bmp", 0.7, BackX, BackY
+    If BackX < 0 and BackY < 0 Then 
+        Delay 100
+        findPicAndClick "Attachment:\叉叉_x50y50.bmp", 25, 25
+        MoveTo center_X, yStart + 10
+        reCheckedTimes = reCheckedTimes + 1
+        If reCheckedTimes > 50 Then 
+            TracePrint Plugin.Sys.GetDateTime() & " " & "Seems clicks adBoard fail, now try to click again start."
+            MoveLeftClick xStart + 634, yStart + 463
+        Else 
+            Goto reWaiting
+        End If
+    Else 
+        TracePrint Plugin.Sys.GetDateTime() & " " & "waitUntilBackspace end."
+    End If
+End Function
+Function checkClickCancel
+    FindPic xStart, yStart, xEnd, yEnd, "Attachment:\叉叉_x50y50.bmp", 0.75, cancelX, cancelY
+    If cancelX > 0 and cancelY > 0 Then 
+        MoveLeftClick cancelX+25, cancelY+25
+    End If
+End Function
+Function TryToLeaveBrownFarmByEsc(zone)
+    MoveLeftClick xStart+130, yStart+130
+    KeyPress "Esc", 1
+    Delay 1500
+    FindPic xStart+100, yStart+100, xEnd-100, yEnd-100, "Attachment:\是.bmp", 0.85, intX, intY
+    MoveLeftClick intX+65, intY+24
+End Function
+Function RestartNOX(zone)
+    setZone(zone)
+    TracePrint Plugin.Sys.GetDateTime() & " " & "RestartNOX start."
+    MoveLeftClick xStart + 906, yStart + 23
+    Delay 1000
+    MoveLeftClick xStart + 521, yStart + 346
+    Delay 1000
+End Function
+Function CheckTodayAdvertisingDisappear(zone)
+    setZone(zone)
+    crossDay1 = inTimeChecker("23", "00", "23", "40")
+    crossDay2 = inTimeChecker("00", "00", "01", "30")
+    crossDay3 = inTimeChecker("10", "00", "10", "30")
+    If crossDay1 or crossDay2 or crossDay3 = true Then 
+        Rem ReCheckTodayAd
+        FindPic xStart,yStart,xEnd,yEnd,"Attachment:\今天不再顯示.bmp", 0.8, intX, intY
+        If intX > 0 And intY > 0 Then 
+            Call MoveLeftClick(intX + 99, intY + 33)
+            Delay 200
+            Call MoveLeftClick(intX + 568, intY + 33)
+            Delay 700
+            Goto ReCheckTodayAd
+        End If
+        FindPic xStart,yStart,xEnd,yEnd,"Attachment:\登入獎勵.bmp",0.7,intX,intY
+        If intX > 0 And intY > 0 Then 
+            Call MoveLeftClick(intX + 75, intY + 21)
+            TracePrint Plugin.Sys.GetDateTime() & " " & "登入獎勵.bmp is found."
+            Delay 3500
+            MoveLeftClick xStart + 150, yStart + 100
+            Delay 500
+            Goto ReCheckTodayAd
+        End If
+        //    	FindPic xStart,yStart,xEnd,yEnd,"Attachment:\登入獎勵2.bmp",0.7,intX,intY
+        //    	If intX > 0 And intY > 0 Then 
+        //        	Call MoveLeftClick(intX + 75, intY + 21)
+        //        	TracePrint Plugin.Sys.GetDateTime() & " " & "登入獎勵2.bmp 有去背的"
+        //        	Goto ReCheckTodayAd
+        //    	End If
+        //    	FindPic xStart,yStart,xEnd,yEnd,"Attachment:\登入獎勵3.bmp",0.7,intX,intY
+        //    	If intX > 0 And intY > 0 Then 
+        //        	Call MoveLeftClick(intX + 75, intY + 21)
+        //        	TracePrint Plugin.Sys.GetDateTime() & " " & "登入獎勵3.bmp 沒去背的"
+        //        	Goto ReCheckTodayAd
+        //    	End If
+    End If
+    Rem reCheckOK
+    Delay 500
+    FindPic xStart,yStart,xEnd,yEnd,"Attachment:\OK_x128y51.bmp",0.8,intX,intY
+    If intX > 0 And intY > 0 Then 
+        Call MoveLeftClick(intX + 64, intY + 26)
+        Goto reCheckOK
+    End If
+End Function
+Function EnsureAtHome(zone)
+    TracePrint Plugin.Sys.GetDateTime() & " " & "EnsureAtHome() is start."
+    setZone (zone)
+    WaitTime = 0
+    Rem WaitingLogin
+    // 如果更新有廣告的時候，這個判定會失敗，因為找不到家 -> 會一直重啟 NOX
+    // 1. 鬆綁   2. 加入檢查
+    FindPic xStart, yStart, xEnd, yEnd, "Attachment:\NoZoomed_HomeModel1.bmp", 0.7, x, y
+    If x<0 and y<0 then 
+        FindPic xStart, yStart, xEnd, yEnd, "Attachment:\NoZoomed_HomeModel2.bmp", 0.7, x, y
+        If x < 0 and y < 0 Then 
+            FindPic xStart, yStart, xEnd, yEnd, "Attachment:\NoZoomed_HomeModel3.bmp", 0.7, x, y
+            If x < 0 and y < 0 Then 
+                TracePrint "NoZoomed_HomeModel-N.bmp 找不到!!"
+                CheckTodayAdvertisingDisappear(zone)
+                Delay 1000
+                WaitTime = WaitTime + 1
+                If WaitTime > 30 Then 
+                    Call RestartNOX(zone)
+                    Delay 35000
+                    Goto RestartBrownFarmEnd
+                Else 
+                    Goto WaitingLogin
+                End If
+            Else 
+                TracePrint Plugin.Sys.GetDateTime() & " " & "NoZoomed_HomeModeN.bmp is found, restart successful."
+            End If
+        End If
+    End if
+    Rem RestartBrownFarmEnd
+End Function
+Function Leave_BF(zone)
+    setZone (zone)
+    TracePrint Plugin.Sys.GetDateTime() & " " & "Leave_BF start."
+    Rem ReCheck
+    Call MoveLeftClick(center_X, yStart+30)
+    KeyPress "Esc", 3
+    Delay 1000
+    //    FindPic xStart, yStart, xEnd, yEnd, "Attachment:\是.bmp", 0.8, x, y
+    //    If x > 0 and y > 0 Then 
+    //        MoveTo x+65, y+27
+    //        LeftClick 1
+    //    Else 
+    //        Goto ReCheck
+    //    End If
+    MoveLeftClick xStart + 528, yStart + 363
+    Delay 1500
+    TracePrint Plugin.Sys.GetDateTime() & " " & "Leave_BF end."
+End Function
+Function inTimeChecker(hh24Start, miStart, hh24End, miEnd)
+    timeArr = Split(Plugin.sys.GetDateTime ,":")
+    hhTemp = Split(timeArr(0), " ")
+    hh = hhTemp(1)
+    mi = timeArr(1)
+    //ss = timeArr(2)
+    If hh24Start <= hh and hh <= hh24End Then 
+        If hh24Start <> hh24End Then 
+            inTimeChecker = true
+        elseif miStart <= mi and mi <= miEnd Then 
+            inTimeChecker = true
+        Else 
+            inTimeChecker = false
+        End if
+    Else 
+        inTimeChecker = false
+    End If
+End Function
+Function RestartBF(zone)
+    TracePrint Plugin.Sys.GetDateTime() & " " & "RestartBF start."
+    setZone(zone)
+    Call CheckPressOK
+    Call Leave_BF(zone)
+    Delay 2000
+    Call tryToStartBrownFarm_zone(zone)
+    TracePrint Plugin.Sys.GetDateTime() & " " & "RestartBF end."
+End Function
+Function tryToStartBrownFarm_zone(zone)
+    TracePrint Plugin.Sys.GetDateTime() & " " & "tryToStartBrownFarm_zone(" & zone & ") start."
+    setZone (zone)
+    reCheckCnt = 0
+    doRestartNoxLimit = 10
+    Rem ReCheckStart
+    FindPic xStart,yStart,xEnd,yEnd, applicationIcon, 0.7, x, y
+    If x > 0 and y > 0 Then 
+        startCnt = 0
+        bakX = x
+        bakY = y
+        TracePrint Plugin.Sys.GetDateTime() & " " & "AppIcon is found, now try to start BF cat."
+        Rem startAgain
+        Call MoveLeftClick (x+24, y+24)
+        Delay 2500
+        FindPic xStart, yStart, xEnd, yEnd, applicationIcon, 0.7, x, y
+        If x > 0 and y > 0 Then 
+            TracePrint "AppIcon is found, however starting fail? now try to start again ..."
+            MoveLeftClick center_X, yStart+18
+            Goto startAgain
+        Else 
+            TracePrint "AppIcon is not found, maybe starting successfully ..."
+            For 6
+                Delay 1000
+                Call MoveLeftClick (bakX+24, bakY+24)
+            Next
+        End if
+    Else 
+        TracePrint Plugin.Sys.GetDateTime() & " " & "AppIcon is not found, can not start BF cat."
+        Delay 1000
+        reCheckCnt = reCheckCnt + 1
+        If reCheckCnt > doRestartNoxLimit Then 
+            Call RestartNOX(zone)
+            Delay 40000
+            reCheckCnt = 0
+        End If
+        Goto ReCheckStart
+    End If
+    TracePrint Plugin.Sys.GetDateTime() & " " & "tryToStartBrownFarm_zone end."
+End Function
+Function TryToResizingAllNox
+    //	setZone(zone)
+    TracePrint Plugin.sys.GetDateTime & "  , TryToResizingAllNox start."
+    //	FindPic xStart, yStart, xEnd, yEnd, "Attachment:\NOX_config.bmp", 0.7, x, y
+    //	If x > 0 and y > 0 Then 
+    MoveLeftClick 942, 143			// 按下 多開nox (有可能按不到)
+    //		MoveLeftClick x + 14, y + 14	// 按下 多開nox
+    Delay 2000
+    MoveLeftClick 1037, 302			// 按下 '多開排列'
+    Delay 300
+    MoveLeftClick 884, 496			// 勾選 '自動排列並舖滿'
+    Delay 300
+    MoveLeftClick 977, 466			// 移到nox 數量欄位
+    Delay 300
+    KeyPress "BackSpace", 1			// 刪除 5
+    Delay 300
+    KeyPress "Num 2", 1				// 鍵入 num 2
+    Delay 300
+    MoveLeftClick 1065, 672			// 按下 '開始排列'
+    Delay 1500
+    MoveLeftClick 1065, 672			// 按下 '開始排列'
+    Delay 2500
+    MoveLeftClick 1186, 386			// 按下	叉叉
+    Delay 200
+    MoveLeftClick 1377, 255			// 按下	叉叉
+    Delay 200
+    zeroX = 300
+    zeroY = 20
+    MoveLeftClick zeroX, zeroY									// active zone 1
+    MoveLeftClick zeroX, zeroY
+    Delay 200
+    MoveLeftClick zeroX + nox_2x2Width, zeroY					// active zone 2
+    MoveLeftClick zeroX + nox_2x2Width, zeroY
+    Delay 200
+    MoveLeftClick zeroX, zeroY + nox_2x2Height					// active zone 3
+    MoveLeftClick zeroX, zeroY + nox_2x2Height
+    Delay 200
+    MoveLeftClick zeroX + nox_2x2Width, zeroY + nox_2x2Height	// active zone 4
+    MoveLeftClick zeroX + nox_2x2Width, zeroY + nox_2x2Height
+    Delay 200
+    //	Else 
+    //		TracePrint "Error Attachment:\multiNOX_config.bmp is not found."
+    //		MsgBox "Error Attachment:\multiNOX_config.bmp is not found."
+    //	End If
+    TracePrint Plugin.sys.GetDateTime & "  , TryToResizingAllNox end."
+End Function
+Function clickBigPartner(zone)
+    setZone (zone)
+    clickTimes = 0
+    Call clickRestartOK("Attachment:\restart_OK.bmp", 0.75)
+    Call clickRestartOK("Attachment:\STRAT.bmp", 0.75)
+    Rem ReCheck
+    FindPic xStart,yStart,xEnd,yEnd,"Attachment:\小伙伴-中經驗.bmp",0.75, x, y
+    If x >= 0 and y >= 0 Then 
+        x = x + 15
+        y = y + 10
+        Call MoveLeftClick(x, y)
+        Delay 1500
+        clickTimes = clickTimes + 1
+        Goto ReCheck
+    End If
+    FindPic xStart,yStart,xEnd,yEnd,"Attachment:\小伙伴-大經驗_x34y33.bmp",0.75, x, y
+    If x >= 0 and y >= 0 Then 
+        x = x + 17
+        y = y + 12
+        Call MoveLeftClick(x, y)
+        Delay 1500
+        clickTimes = clickTimes + 1
+        Goto ReCheck
+    End If
+    FindPic xStart,yStart,xEnd,yEnd,"Attachment:\小伙伴-中金幣.bmp",0.75, x, y
+    If x >= 0 and y >= 0 Then 
+        x = x + 19
+        y = y + 14
+        Call MoveLeftClick(x, y)
+        Delay 1500
+        clickTimes = clickTimes + 1
+        Goto ReCheck
+    End If
+    FindPic xStart,yStart,xEnd,yEnd,"Attachment:\小伙伴-大金幣_x41y43.bmp",0.7, x, y
+    If x >= 0 and y >= 0 Then 
+        x = x + 20
+        y = y + 15
+        Call MoveLeftClick(x, y)
+        Delay 1500
+        clickTimes = clickTimes + 1
+        Goto ReCheck
+    End If
+    FindPic xStart,yStart,xEnd,yEnd,"Attachment:\叉叉-去背2.bmp",0.75, x, y
+    If x >= 0 and y >= 0 Then 
+        x = x + 12
+        y = y + 13
+        Call MoveLeftClick(x, y)
+        Delay 1500
+        Goto ReCheck
+    End If
+End Function
+Function clickZonePartner(zone)
+    setZone (zone)
+    clickBigPartner (zone)
+    If clickTimes > 0 Then 
+        Call ZoomOut_zone(center_X + 150, center_Y - 80, 3)
+        clickTimes = 0
+    End If
+    Rem ReCheckClick
+    needRecheck = false
+    Call clickRestartOK("Attachment:\restart_OK.bmp", 0.75)
+    Call clickRestartOK("Attachment:\STRAT.bmp", 0.75)
+    Call clickRestartOK("Attachment:\是.bmp", 0.75)
+    //	  Call clickPartnerByPicture("Attachment:\返家.bmp", 0.75)
+    Call clickPartnerByPicture("Attachment:\叉叉-去背2.bmp", 0.7)
+    //    Call clickPartnerByPicture("Attachment:\restart_OK.bmp", 0.7)
+    Call clickPartnerByPicture("Attachment:\叉叉-小伙伴.bmp", 0.7)
+    Call clickPartnerByPicture("Attachment:\小伙伴-小經驗2.bmp", 0.7)
+    call clickPartnerByPicture("Attachment:\小伙伴-小金幣2.bmp", 0.7)
+    call clickPartnerByPicture("Attachment:\小伙伴-經驗_x20y19.bmp", 0.7)
+    Call clickPartnerByPicture("Attachment:\小伙伴-金幣_x20y21.bmp", 0.7)
+    Call CheckClickXXandBackspace(zone)
+    If needRecheck = true Then 
+        Goto ReCheckClick
+    End If
+End Function
+Function clickRestartOK(picName, similarity)
+    FindPic xStart, yStart, xEnd, yEnd, picName, similarity, intX, intY
+    If intX > 0 And intY > 0 Then 
+        Call MoveLeftClick(intX + 75, intY + 30)
+        Delay 1500
+        needRecheck = true
+    End If
+    MoveTo xStart + 100, yStart + 100
+End Function
+//-------------------BF-Common------------------
+//-------------------utils----------------------
+Function findPicAndClick(picName, offsetX, offsetY)
+    FindPic xStart, yStart, xEnd, yEnd, picName, generalSimilarity, resX, resY
+    If resX > 0 and resY > 0 Then 
+        MoveLeftClick resX + offsetX, resY + offsetY
+    End If
+End Function
+Function DragToRef(relatedX, relatedY, speed, frame)
+    speedX = relatedX / frame
+    speedY = relatedY / frame
+    For frame
+        MoveR speedX, speedY
+        Delay speed	
+    Next
+    Delay 50
+End Function
+Function DragToAbs(absX, absY, speed, frame)
+    GetCursorPos curX, curY
+    refX = absX - curX
+    refY = absY - curY
+    DragToRef refX, refY, speed, frame
+End Function
+Function MoveLeftDown (x, y)
+    MoveTo x, y
+    Delay 100
+    LeftDown 1
+    Delay 300
+End Function
+Function MoveRefLeftDown (refX, refY)
+    MoveR refX, refY
+    Delay 100
+    LeftDown 1
+    Delay 100
+End Function
+Function MoveLeftClick (x, y)
+    MoveTo x, y
+    Delay 50
+    LeftClick 1
+    Delay 50
+End Function
+Function MoveRefLeftClick (x, y)
+    MoveR x, y
+    Delay 100
+    LeftClick 1
+    Delay 100
+End Function
+//-------------------utils----------------------
